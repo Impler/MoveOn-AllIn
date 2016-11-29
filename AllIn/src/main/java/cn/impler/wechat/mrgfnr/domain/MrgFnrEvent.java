@@ -66,4 +66,11 @@ public class MrgFnrEvent {
 		this.fee = fee;
 	}
 
+	@Override
+	public String toString() {
+		return "MrgFnrEvent [id=" + id + ", userId=" + userId + ", name="
+				+ name + ", type=" + type + ", date=" + date + ", fee=" + fee
+				+ "]";
+	}
+
 }

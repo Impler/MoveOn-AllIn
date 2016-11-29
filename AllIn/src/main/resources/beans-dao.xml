@@ -20,10 +20,20 @@
 		p:password="${jdbc.password}" />
 
 	<bean id="sqlSessionFactory" 
-		class="org.mybatis.spring.SqlSessionFactoryBean" 
-		p:dataSource-ref="dataSource"
-		p:mapperLocations="classpath*:*/mybatis/*Mapper.xml"
-		p:typeHandlersPackage="cn.impler.**.domain.*" />
+		class="org.mybatis.spring.SqlSessionFactoryBean"
+		p:dataSource-ref="dataSource" 
+		p:mapperLocations="classpath*:**/mybatis/*Mapper.xml"
+		p:typeAliasesPackage="cn.impler.wechat.mrgfnr.domain">
+		<property name="plugins">
+			<array>
+				<bean class="cn.impler.framework.mybatis.dao.plugin.PaginationPlugin">
+					<property name="dialect">
+						<bean class="cn.impler.framework.mybatis.dao.dialect.MySqlDialect" />
+					</property>
+				</bean>
+			</array>
+		</property>
+	</bean>
 		
 	<bean id="sqlSession" 
 		class="org.mybatis.spring.SqlSessionTemplate"
