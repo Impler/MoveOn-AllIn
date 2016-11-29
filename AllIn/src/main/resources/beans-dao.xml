@@ -33,6 +33,13 @@
 				</bean>
 			</array>
 		</property>
+		<property name="typeHandlers">
+			<array>
+				<bean 
+					class="cn.impler.framework.mybatis.dao.typehandler.GenericEnumTypeHandler" 
+					c:typeClass="cn.impler.wechat.mrgfnr.dmo.MrgFnrEventType" />
+			</array>
+		</property>
 	</bean>
 		
 	<bean id="sqlSession" 

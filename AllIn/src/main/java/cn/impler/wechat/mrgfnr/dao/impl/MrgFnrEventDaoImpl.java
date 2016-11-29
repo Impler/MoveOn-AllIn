@@ -2,7 +2,7 @@ package cn.impler.wechat.mrgfnr.dao.impl;
 
 import org.springframework.stereotype.Component;
 
-import cn.impler.framework.mybatis.dao.itf.AbstractDao;
+import cn.impler.framework.mybatis.dao.intf.AbstractDao;
 import cn.impler.wechat.mrgfnr.dao.MrgFnrEventDao;
 import cn.impler.wechat.mrgfnr.domain.MrgFnrEvent;
 

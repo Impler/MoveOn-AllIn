@@ -4,6 +4,11 @@ import java.util.Date;
 
 import cn.impler.wechat.mrgfnr.dmo.MrgFnrEventType;
 
+/**
+ * marriage and funeral event domain
+ * @author impler
+ * @date 2016-11-29
+ */
 public class MrgFnrEvent {
 	// serial number
 	private int id;
@@ -17,7 +22,11 @@ public class MrgFnrEvent {
 	private Date date;
 	// the costs
 	private float fee;
-
+	// create time
+	private Date createTime;
+	// last update time
+	private Date lastUpdateTime;
+	
 	public int getId() {
 		return id;
 	}
@@ -66,11 +75,28 @@ public class MrgFnrEvent {
 		this.fee = fee;
 	}
 
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getLastUpdateTime() {
+		return lastUpdateTime;
+	}
+
+	public void setLastUpdateTime(Date lastUpdateTime) {
+		this.lastUpdateTime = lastUpdateTime;
+	}
+
 	@Override
 	public String toString() {
 		return "MrgFnrEvent [id=" + id + ", userId=" + userId + ", name="
 				+ name + ", type=" + type + ", date=" + date + ", fee=" + fee
-				+ "]";
+				+ ", createTime=" + createTime + ", lastUpdateTime="
+				+ lastUpdateTime + "]";
 	}
-
+	
 }
