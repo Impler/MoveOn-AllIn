@@ -20,7 +20,7 @@
 		p:password="${jdbc.password}" />
 
 	<bean id="sqlSessionFactory" 
-		class="org.mybatis.spring.SqlSessionFactoryBean"
+		class="cn.impler.framework.mybatis.dao.spring.EnhancedSqlSessionFactoryBean"
 		p:dataSource-ref="dataSource" 
 		p:mapperLocations="classpath*:**/mybatis/*Mapper.xml"
 		p:typeAliasesPackage="cn.impler.wechat.mrgfnr.domain">
@@ -33,11 +33,9 @@
 				</bean>
 			</array>
 		</property>
-		<property name="typeHandlers">
+		<property name="genericEnumClassName">
 			<array>
-				<bean 
-					class="cn.impler.framework.mybatis.dao.typehandler.GenericEnumTypeHandler" 
-					c:typeClass="cn.impler.wechat.mrgfnr.dmo.MrgFnrEventType" />
+				<value>cn.impler.wechat.mrgfnr.dmo.MrgFnrEventType</value>
 			</array>
 		</property>
 	</bean>
