@@ -13,8 +13,12 @@
 		<result column="last_update_time" property="lastUpdateTime"/>
 	</resultMap>
 	
-	<select id="select" resultMap="event">
-		select * from t_wechat_mrgfnr;
+	<select id="queryInPagination" resultMap="event">
+		SELECT USER_ID, NAME, TYPE, DATE, FEE, CREATE_TIME, LAST_UPDATE_TIME FROM T_WECHAT_MRGFNR
+	</select>
+	
+	<select id="count" resultType="int">
+		SELECT COUNT(1) FROM T_WECHAT_MRGFNR
 	</select>
 </mapper>
 

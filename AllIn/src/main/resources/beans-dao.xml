@@ -33,7 +33,7 @@
 				</bean>
 			</array>
 		</property>
-		<property name="genericEnumClassName">
+		<property name="genericEnumClassNames">
 			<array>
 				<value>cn.impler.wechat.mrgfnr.dmo.MrgFnrEventType</value>
 			</array>

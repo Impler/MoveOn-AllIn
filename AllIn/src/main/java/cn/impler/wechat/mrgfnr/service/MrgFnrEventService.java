@@ -22,5 +22,20 @@ public interface MrgFnrEventService {
 	 */
 	List<MrgFnrEvent> selectInPagination(MrgFnrEventSearchBean search, Pagination page);
 
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	int delete(int id);
+
+	/**
+	 * 
+	 * @param event
+	 * @return
+	 */
+	int update(MrgFnrEvent event);
+
+
 	
 }

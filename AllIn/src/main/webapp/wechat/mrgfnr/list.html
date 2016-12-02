@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
@@ -9,6 +8,40 @@
 		<link href="../plugin/css/mui.min.css" rel="stylesheet" />
 		<script type="text/javascript" charset="UTF-8">
 			mui.init();
+			mui.ajax("../mrgfnr.do", {dataType:"json", success:function(xhr){
+				console.log(xhr);
+				var p = mui(".mui-input-group")[0];
+				for(var i=0; i<xhr.length; i++){
+					var data = xhr[0];
+					var div1 = document.createElement("div");
+					div1.className = "mui-input-row mui-checkbox mui-left";
+					var div2 = document.createElement("div");
+					div2.className = "mui-navigate-right";
+					var div3 = document.createElement("div");
+					div3.className = "mui-row";
+					var div4 = document.createElement("div");
+					div4.className = "mui-col-sm-7 mui-col-xs-7";
+					var lb1 = document.createElement("label");
+					lb1.innerHTML = data.name;
+					div4.appendChild(lb1);
+					div3.appendChild(div4);
+					var div5 = document.createElement("div");
+					div5.className = "mui-col-sm-4 mui-col-xs-4";
+					var lb2 = document.createElement("label");
+					lb2.innerHTML = data.fee;
+					console.log(data.fee);
+					div5.appendChild(lb2);
+					div3.appendChild(div5);
+					div2.appendChild(div3);
+					div1.appendChild(div2);
+					
+					var c = document.createElement("input");
+					c.name = "checkbox";
+					c.type="checkbox"
+					div1.appendChild(c);
+					p.appendChild(div1);
+				}
+			}});
 		</script>
 	</head>
 

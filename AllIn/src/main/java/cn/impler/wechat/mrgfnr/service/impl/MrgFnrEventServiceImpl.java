@@ -28,4 +28,14 @@ public class MrgFnrEventServiceImpl implements MrgFnrEventService {
 		return mfeDao.queryInPagination(search, page);
 	}
 
+	@Override
+	public int delete(int id) {
+		return mfeDao.delete(id);
+	}
+
+	@Override
+	public int update(MrgFnrEvent event) {
+		return mfeDao.update(event);
+	}
+
 }

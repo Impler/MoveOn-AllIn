@@ -2,6 +2,7 @@ package cn.impler.wechat.mrgfnr.domain;
 
 import java.util.Date;
 
+import cn.impler.common.util.DateFormatUtil;
 import cn.impler.wechat.mrgfnr.dmo.MrgFnrEventType;
 
 /**
@@ -62,7 +63,7 @@ public class MrgFnrEvent {
 	public Date getDate() {
 		return date;
 	}
-
+	
 	public void setDate(Date date) {
 		this.date = date;
 	}
@@ -91,6 +92,17 @@ public class MrgFnrEvent {
 		this.lastUpdateTime = lastUpdateTime;
 	}
 
+	public String getFormatedDateStr(){
+		return DateFormatUtil.getDefaultFormtedDateStr(date);
+	}
+	public String getFormatedCreateTimeStr(){
+		return DateFormatUtil.getDefaultFormatedDatetimeStr(this.createTime);
+	}
+	
+	public String getFormatedLastUpdateTimeStr(){
+		return DateFormatUtil.getDefaultFormatedDatetimeStr(this.lastUpdateTime);
+	}
+	
 	@Override
 	public String toString() {
 		return "MrgFnrEvent [id=" + id + ", userId=" + userId + ", name="
