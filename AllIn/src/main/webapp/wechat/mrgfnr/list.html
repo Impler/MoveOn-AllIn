@@ -4,42 +4,33 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>全部</title>
-		<script src="../plugin/js/mui.min.js"></script>
 		<link href="../plugin/css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script type="text/javascript" src="../plugin/js/mui.min.js"></script>
 		<script type="text/javascript" charset="UTF-8">
 			mui.init();
 			mui.ajax("../mrgfnr.do", {dataType:"json", success:function(xhr){
-				console.log(xhr);
-				var p = mui(".mui-input-group")[0];
+				var form = mui(".mui-input-group")[0];
+				var htmlStr = "<div class=\"mui-input-row mui-checkbox mui-left\">"
+							+ "	<div class=\"mui-navigate-right\">"
+							+ "		<div class=\"mui-row\">"
+							+ "			<div class=\"mui-col-sm-7 mui-col-xs-7\">"
+							+ "				<label>{0}</label>"
+							+ "			</div>"
+							+ "			<div class=\"mui-col-sm-4 mui-col-xs-4\">"
+							+ "				<label>{1}</label>"
+							+ "			</div>"
+							+ "		</div>"
+							+ "	</div>"
+							+ "	<input name=\"checkbox\" value=\"Item 1\" type=\"checkbox\" />"
+							+ "</div>"
 				for(var i=0; i<xhr.length; i++){
-					var data = xhr[0];
-					var div1 = document.createElement("div");
-					div1.className = "mui-input-row mui-checkbox mui-left";
-					var div2 = document.createElement("div");
-					div2.className = "mui-navigate-right";
-					var div3 = document.createElement("div");
-					div3.className = "mui-row";
-					var div4 = document.createElement("div");
-					div4.className = "mui-col-sm-7 mui-col-xs-7";
-					var lb1 = document.createElement("label");
-					lb1.innerHTML = data.name;
-					div4.appendChild(lb1);
-					div3.appendChild(div4);
-					var div5 = document.createElement("div");
-					div5.className = "mui-col-sm-4 mui-col-xs-4";
-					var lb2 = document.createElement("label");
-					lb2.innerHTML = data.fee;
-					console.log(data.fee);
-					div5.appendChild(lb2);
-					div3.appendChild(div5);
-					div2.appendChild(div3);
-					div1.appendChild(div2);
-					
-					var c = document.createElement("input");
-					c.name = "checkbox";
-					c.type="checkbox"
-					div1.appendChild(c);
-					p.appendChild(div1);
+					var data = xhr[i];
+					var html = htmlStr.format(data.name, data.fee);
+					var tmpObj = document.createElement("div"); 
+					tmpObj.innerHTML = html; 
+					var dom = tmpObj.childNodes[0]; 
+					form.appendChild(dom);
 				}
 			}});
 		</script>
@@ -77,19 +68,6 @@
 							</div>
 						</div>
 						<input name="checkbox" value="Item 2" type="checkbox" />
-					</div>
-					<div class="mui-input-row mui-checkbox mui-left">
-						<div class="mui-navigate-right">
-							<div class="mui-row">
-								<div class="mui-col-sm-7 mui-col-xs-7" style="border:1px solid">
-									<label>Item1</label>
-								</div>
-								<div class="mui-col-sm-4 mui-col-xs-4" style="border:1px solid">
-									<label>500</label>
-								</div>
-							</div>
-						</div>
-						<input name="checkbox" type="checkbox" />
 					</div>
 				</form>
 			</div>
