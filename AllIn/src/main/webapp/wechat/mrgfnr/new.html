@@ -1,16 +1,60 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title></title>
-    <script src="../js/mui.min.js"></script>
-    <link href="../css/mui.min.css" rel="stylesheet"/>
-    <script type="text/javascript" charset="UTF-8">
-      	mui.init();
-    </script>
-</head>
-<body>
-	hello world
-</body>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../plugin/css/mui.min.css" rel="stylesheet" />
+		<link href="../plugin/css/mui.picker.min.css" rel="stylesheet" />
+		<script src="../plugin/js/mui.min.js"></script>
+		<script src="../plugin/js/mui.picker.min.js"></script>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>事件</label>
+					<input type="text" class="mui-input-clear" placeholder="请输入事件名称">
+				</div>
+				<div class="mui-input-row">
+					<label>类型</label>
+					<select>
+						<option>婚</option>
+						<option>丧</option>
+					</select>
+				</div>
+				<div class="mui-input-row">
+					<label>费用</label>
+					<input type="number" class="mui-input-clear" />
+				</div>
+				<div class="mui-input-row">
+					<label>日期</label>
+					<label id="date"></label>
+					<input type="hidden"/>
+				</div>
+				<div <div class="mui-input-row">
+					<label>备注</label>
+					<textarea></textarea>
+				</div>
+				<div class="mui-button-row">
+					<button type="button" class="mui-btn mui-btn-primary">确认</button>
+					<button type="button" class="mui-btn mui-btn-danger">取消</button>
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript" charset="UTF-8">
+			mui.init();
+			mui("#date")[0].addEventListener("click", function() {
+				var dtPicker = new mui.DtPicker();
+				dtPicker.show(function(selectItems) {
+					mui("#date")[0].innerHTML = selectItems.y.value
+					//alert(selectItems.y); //{text: "2016",value: 2016} 
+					//alert(selectItems.m); //{text: "05",value: "05"} 
+				})
+			})
+		</script>
+	</body>
+
 </html>
