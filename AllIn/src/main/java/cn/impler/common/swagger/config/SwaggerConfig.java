@@ -27,11 +27,43 @@ public class SwaggerConfig {
 				apiInfo()).includePatterns(".*?");
 	}
 
-	private ApiInfo apiInfo() {
-		ApiInfo apiInfo = new ApiInfo("AllIn APIS", "AllIn APIS",
+	private ExtensionApiInfo apiInfo() {
+		ExtensionApiInfo apiInfo = new ExtensionApiInfo("AllIn APIS", "AllIn APIS",
 				"My Apps API terms of service", "My Apps API Contact Email",
-				"My Apps API Licence Type", "My Apps API License URL");
+				"My Apps API Licence Type", "My Apps API License URL", 
+				".do");
 		return apiInfo;
+	}
+	
+	/**
+	 * Extension of ApiInfo that add a urlSuffix parameter to fit specific request url pattern
+	 * @author impler
+	 * @date 2016-12-14
+	 */
+	class ExtensionApiInfo extends ApiInfo{
+
+		private String urlSuffix = "";
+		public ExtensionApiInfo(String title, String description,
+				String termsOfServiceUrl, String contact, String license,
+				String licenseUrl) {
+			super(title, description, termsOfServiceUrl, contact, license, licenseUrl);
+		}
+		
+		public ExtensionApiInfo(String title, String description,
+				String termsOfServiceUrl, String contact, String license,
+				String licenseUrl, String urlSuffix) {
+			super(title, description, termsOfServiceUrl, contact, license,
+					licenseUrl);
+			this.urlSuffix = urlSuffix;
+		}
+
+		public String getUrlSuffix() {
+			return urlSuffix;
+		}
+
+		public void setUrlSuffix(String urlSuffix) {
+			this.urlSuffix = urlSuffix;
+		}
 	}
 
 }

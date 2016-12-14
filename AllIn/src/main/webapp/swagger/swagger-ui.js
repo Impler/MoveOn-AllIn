@@ -3555,7 +3555,9 @@ SwaggerClient.prototype.build = function (mock) {
     jqueryAjaxCache: this.jqueryAjaxCache,
     connectionAgent: this.connectionAgent,
     enableCookies: this.enableCookies,
-    url: this.url,
+    // impler add ".do" 2016-12-14 s
+    url: this.url + ".do",
+    // impler add ".do" 2016-12-14 e
     method: 'get',
     headers: {
       accept: this.swaggerRequestHeaders
@@ -3762,6 +3764,11 @@ SwaggerClient.prototype.buildFromSpec = function (response) {
   self.apis.help = _.bind(self.help, self);
 
   _.forEach(response.paths, function (pathObj, path) {
+	//impler add 2016-12-14 s
+	if(typeof self.info["urlSuffix"] != 'undefined'){
+		path += self.info.urlSuffix;
+	}
+	//impler add 2016-12-14 e
     // Only process a path if it's an object
     if (!_.isPlainObject(pathObj)) {
       return;
@@ -3787,7 +3794,7 @@ SwaggerClient.prototype.buildFromSpec = function (response) {
       }
 
       var operationId = self.idFromOp(path, method, operation);
-
+      
       var operationObject = new Operation(self,
         operation.scheme,
         operationId,
@@ -6439,7 +6446,8 @@ SwaggerSpecConverter.prototype.resourceListing = function(obj, swagger, opts, ca
   for(i = 0; i < expectedCount; i++) {
     var api = obj.apis[i];
     var path = api.path;
-    var absolutePath = this.getAbsolutePath(obj.swaggerVersion, this.docLocation, path);
+    // impler add a parameter swagger.info 2016-12-14
+    var absolutePath = this.getAbsolutePath(obj.swaggerVersion, this.docLocation, path, swagger.info);
 
     if(api.description) {
       swagger.tags = swagger.tags || [];
@@ -6505,6 +6513,15 @@ SwaggerSpecConverter.prototype.getAbsolutePath = function(version, docLocation, 
     location += path;
   }
   location = location.replace('{format}', 'json');
+  // impler add 2016-12-14 s
+  if(typeof arguments[3] != 'undefined'){
+	  var apiInfo = arguments[3];
+	  if(typeof apiInfo["urlSuffix"] != 'undefined'){
+		  
+		  location += apiInfo["urlSuffix"];
+	  }
+  }
+  //impler add 2016-12-14 e
   return location;
 };
 
@@ -6596,6 +6613,11 @@ SwaggerSpecConverter.prototype.apiInfo = function(obj, swagger) {
         swagger.license.url = info.licenseUrl;
       }
     }
+    // impler add 2016-12-14 s
+    if(info.urlSuffix){
+    	swagger.info.urlSuffix = info.urlSuffix;
+    }
+    // impler add 2016-12-14 e
   }
   else {
     this.warnings.push('missing info section');

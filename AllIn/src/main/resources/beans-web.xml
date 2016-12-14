@@ -14,7 +14,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<mvc:annotation-driven />
-	<mvc:default-servlet-handler/>
+
 	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="converters">
 			<!-- convert String to IGenericEnum/Enum -->

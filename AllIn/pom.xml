@@ -89,6 +89,7 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>${version.servlet}</version>
+			<scope>provided</scope>
 		</dependency>
 		<!-- Servlet dependencies e -->
 
@@ -182,5 +183,16 @@
 	</dependencies>
 	<build>
 		<finalName>AllIn</finalName>
+		<plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                	<port>8080</port>
+                    <path>/AllIn</path>
+                </configuration>
+            </plugin>
+		</plugins>
 	</build>
 </project>
