@@ -1,4 +1,4 @@
-package cn.impler.wechat.mrgfnr.dao;
+package cn.impler.wechat.mrgfnr.dao.intf;
 
 import java.util.List;
 

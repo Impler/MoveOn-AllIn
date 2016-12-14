@@ -1,4 +1,4 @@
-package cn.impler.wechat.mrgfnr.service;
+package cn.impler.wechat.mrgfnr.service.intf;
 
 import java.util.List;
 

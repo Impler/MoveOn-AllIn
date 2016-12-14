@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.impler.framework.mybatis.dao.dto.Pagination;
-import cn.impler.wechat.mrgfnr.dao.MrgFnrEventDao;
+import cn.impler.wechat.mrgfnr.dao.intf.MrgFnrEventDao;
 import cn.impler.wechat.mrgfnr.domain.MrgFnrEvent;
 import cn.impler.wechat.mrgfnr.dto.MrgFnrEventSearchBean;
-import cn.impler.wechat.mrgfnr.service.MrgFnrEventService;
+import cn.impler.wechat.mrgfnr.service.intf.MrgFnrEventService;
 
 @Service("mrgFnrEventService")
 public class MrgFnrEventServiceImpl implements MrgFnrEventService {
