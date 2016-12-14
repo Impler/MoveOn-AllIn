@@ -29,7 +29,7 @@ public class SwaggerConfig {
 
 	private ExtensionApiInfo apiInfo() {
 		ExtensionApiInfo apiInfo = new ExtensionApiInfo("AllIn APIS", "AllIn APIS",
-				"My Apps API terms of service", "My Apps API Contact Email",
+				"My Apps API terms of service", "704090860@qq.com",
 				"My Apps API Licence Type", "My Apps API License URL", 
 				".do");
 		return apiInfo;
