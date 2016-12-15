@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.impler.wechat.mrgfnr.dao.MrgFnrEventDao">
+<mapper namespace="cn.impler.wechat.mrgfnr.dao.intf.MrgFnrEventDao">
 	
 	<resultMap type="MrgFnrEvent" id="event">
 		<id column="id" property="id"/>
@@ -14,11 +14,28 @@
 	</resultMap>
 	
 	<select id="queryInPagination" resultMap="event">
-		SELECT USER_ID, NAME, TYPE, DATE, FEE, CREATE_TIME, LAST_UPDATE_TIME FROM T_WECHAT_MRGFNR
+		SELECT ID, USER_ID, NAME, TYPE, DATE, FEE, CREATE_TIME, LAST_UPDATE_TIME FROM T_WECHAT_MRGFNR
 	</select>
 	
 	<select id="count" resultType="int">
 		SELECT COUNT(1) FROM T_WECHAT_MRGFNR
 	</select>
+	
+	<select id="selectOneByKey" resultMap="event">
+		SELECT ID, USER_ID, NAME, TYPE, DATE, FEE, CREATE_TIME, LAST_UPDATE_TIME 
+		FROM T_WECHAT_MRGFNR
+		WHERE ID = #{id}
+	</select>
+	
+	<insert id="insert" parameterType="MrgFnrEvent" keyColumn="id" useGeneratedKeys="true">
+		INSERT INTO T_WECHAT_MRGFNR (USER_ID, NAME, TYPE, DATE, FEE, CREATE_TIME, LAST_UPDATE_TIME)
+		VALUES(#{userId}, #{name}, #{type}, #{date}, #{fee}, #{createTime}, #{lastUpdateTime})
+	</insert>
+	
+	<update id="update" parameterType="MrgFnrEvent">
+		UPDATE T_WECHAT_MRGFNR 
+		SET NAME = #{name}, TYPE = #{type}, FEE = #{fee}, DATE = #{date}, LAST_UPDATE_TIME = now()
+		WHERE ID = #{id}
+	</update>
 </mapper>
 

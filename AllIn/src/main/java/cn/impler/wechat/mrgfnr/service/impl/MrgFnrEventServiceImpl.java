@@ -38,4 +38,9 @@ public class MrgFnrEventServiceImpl implements MrgFnrEventService {
 		return mfeDao.update(event);
 	}
 
+	@Override
+	public MrgFnrEvent selectById(int id) {
+		return mfeDao.selectOneByKey(id);
+	}
+
 }

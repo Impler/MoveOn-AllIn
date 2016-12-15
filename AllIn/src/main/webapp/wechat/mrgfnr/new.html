@@ -5,10 +5,26 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title></title>
-		<link href="../plugin/css/mui.min.css" rel="stylesheet" />
-		<link href="../plugin/css/mui.picker.min.css" rel="stylesheet" />
-		<script src="../plugin/js/mui.min.js"></script>
-		<script src="../plugin/js/mui.picker.min.js"></script>
+		<link href="/AllIn/wechat/plugin/css/mui.min.css" rel="stylesheet" />
+		<link href="/AllIn/wechat/plugin/css/mui.picker.min.css" rel="stylesheet" />
+		<script src="/AllIn/wechat/plugin/js/mui.min.js"></script>
+		<script src="/AllIn/wechat/plugin/js/mui.picker.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			~function(){
+				var path = window.location.pathname;
+				var lastPath = path.substring(path.lastIndexOf("/") + 1);
+				var idReg = /(\d+)\.\w/;
+				if(idReg.test(lastPath)){
+					var id = RegExp.$1;
+					var url = "/AllIn/wechat/mrgfnr/" + id + ".do";
+					mui.ajax(url, {success : function(xhr){
+							console.log(xhr.data);
+						}
+					});
+				}
+			}();
+		</script>
 	</head>
 
 	<body>
@@ -45,7 +61,6 @@
 			</form>
 		</div>
 		<script type="text/javascript" charset="UTF-8">
-			mui.init();
 			mui("#date")[0].addEventListener("click", function() {
 				var dtPicker = new mui.DtPicker();
 				dtPicker.show(function(selectItems) {

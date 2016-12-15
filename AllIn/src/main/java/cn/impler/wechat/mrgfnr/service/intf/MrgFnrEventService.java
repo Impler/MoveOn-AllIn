@@ -36,6 +36,13 @@ public interface MrgFnrEventService {
 	 */
 	int update(MrgFnrEvent event);
 
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	MrgFnrEvent selectById(int id);
+
 
 	
 }

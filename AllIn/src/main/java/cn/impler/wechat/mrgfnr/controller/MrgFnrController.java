@@ -24,17 +24,25 @@ public class MrgFnrController {
 	@Autowired
 	private MrgFnrEventService mfeService;
 	
+	/**
+	 * query marriage and funeral events by pagination
+	 * @param search
+	 * @param page
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public JSONObject query(MrgFnrEventSearchBean search, Pagination page){
-		if(page.equals(Pagination.DEFAULT)){
-			page.setPageSize(10);
-		}
 		List<MrgFnrEvent> es = mfeService.selectInPagination(search, page);
 		JSONArray esArray = JSONArray.fromObject(es);
 		return Result.newSuccessResult(esArray).toJson();
 	}
 	
+	/**
+	 * add a marriage or funeral event
+	 * @param event
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject add(MrgFnrEvent event){
@@ -42,6 +50,11 @@ public class MrgFnrController {
 		return Result.newSuccessResult().toJson();
 	}
 	
+	/**
+	 * delete a marriage or funeral event
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public JSONObject delete(@PathVariable("id") int id){
@@ -49,6 +62,23 @@ public class MrgFnrController {
 		return Result.newSuccessResult().toJson();
 	}
 	
+	/**
+	 * query a marriage or funeral event by id
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public JSONObject selectOne(@PathVariable int id){
+		MrgFnrEvent event = mfeService.selectById(id);
+		return Result.newSuccessResult(event).toJson();
+	}
+	
+	/**
+	 * update a marriage or funeral event information
+	 * @param event
+	 * @return
+	 */
 	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
 	@ResponseBody
 	public JSONObject update(MrgFnrEvent event){
@@ -56,6 +86,14 @@ public class MrgFnrController {
 		return Result.newSuccessResult().toJson();
 	}
 	
-	
+	/**
+	 * route to event detail page
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/detail/{id}", method = RequestMethod.GET)
+	public String detail(@PathVariable int id){
+		return "wechat/mrgfnr/new";
+	}
 	
 }

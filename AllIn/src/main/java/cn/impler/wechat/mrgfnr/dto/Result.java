@@ -7,50 +7,50 @@ import net.sf.json.JSONObject;
 public class Result implements Serializable{
 
 	private static final long serialVersionUID = 5895691531475133249L;
-	public static final String RESULT_STATUS_CODE_KEY = "status";
-	public static final String RESULT_KEY = "result";
-	public static final String RESULT_MESSAGE = "msg";
+	public static final String RESULT_code_CODE_KEY = "code";
+	public static final String RESULT_KEY = "data";
+	public static final String RESULT_MESSAGE = "message";
 	
-	// result status 
-	private ResultStatus status;
-	// result object
-	private Object result;
-	// result message
+	// data code 
+	private ResultCode code;
+	// data object
+	private Object data;
+	// data message
 	private String message;
 	
 	public Result() {
 		super();
 	}
 
-	public Result(ResultStatus status) {
-		this(status, null, null);
+	public Result(ResultCode code) {
+		this(code, null, null);
 	}
 
-	public Result(ResultStatus status, Object result) {
-		this(status, result, null);
+	public Result(ResultCode code, Object data) {
+		this(code, data, null);
 	}
 
-	public Result(ResultStatus status, Object result, String message) {
+	public Result(ResultCode code, Object data, String message) {
 		this();
-		this.status = status;
-		this.result = result;
+		this.code = code;
+		this.data = data;
 		this.message = message;
 	}
 	
-	public ResultStatus getStatus() {
-		return status;
+	public ResultCode getCode() {
+		return code;
 	}
 
-	public void setStatus(ResultStatus status) {
-		this.status = status;
+	public void setCode(ResultCode code) {
+		this.code = code;
 	}
 
-	public Object getResult() {
-		return result;
+	public Object getData() {
+		return data;
 	}
 
-	public void setResult(Object result) {
-		this.result = result;
+	public void setData(Object data) {
+		this.data = data;
 	}
 
 	public String getMessage() {
@@ -63,19 +63,19 @@ public class Result implements Serializable{
 
 	public JSONObject toJson(){
 		JSONObject rs = new JSONObject();
-		rs.put(RESULT_STATUS_CODE_KEY, null == this.status? "" : this.status.getCode());
-		rs.put(RESULT_KEY, null == this.result? "" : this.result);
+		rs.put(RESULT_code_CODE_KEY, null == this.code? "" : this.code.getCode());
+		rs.put(RESULT_KEY, null == this.data? "" : this.data);
 		rs.put(RESULT_MESSAGE, null == this.message? "" : this.message);
 		return rs;
 	}
 	
-	public static enum ResultStatus{
+	public static enum ResultCode{
 		
 		SUCCESS("0000"), Failure("9999");
 		
 		private String code;
 
-		private ResultStatus(String code) {
+		private ResultCode(String code) {
 			this.code = code;
 		}
 		
@@ -85,23 +85,23 @@ public class Result implements Serializable{
 	}
 	
 	public static Result newSuccessResult(){
-		return new Result(ResultStatus.SUCCESS);
+		return new Result(ResultCode.SUCCESS);
 	}
 	
-	public static Result newSuccessResult(Object result){
-		return new Result(ResultStatus.SUCCESS, result);
+	public static Result newSuccessResult(Object data){
+		return new Result(ResultCode.SUCCESS, data);
 	}
 	
-	public static Result newResult(ResultStatus status) {
-		return new Result(status);
+	public static Result newResult(ResultCode code) {
+		return new Result(code);
 	}
 
-	public static Result newResult(ResultStatus status, Object result) {
-		return new Result(status, result);
+	public static Result newResult(ResultCode code, Object data) {
+		return new Result(code, data);
 	}
 
-	public static Result newResult(ResultStatus status, Object result, String message) {
-		return new Result(status, result, message);
+	public static Result newResult(ResultCode code, Object data, String message) {
+		return new Result(code, data, message);
 	}
 }
 
