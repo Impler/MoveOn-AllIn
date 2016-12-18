@@ -7,14 +7,21 @@
 		<title></title>
 		<link href="/AllIn/wechat/plugin/css/mui.min.css" rel="stylesheet" />
 		<link href="/AllIn/wechat/plugin/css/mui.picker.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.picker {
+				width: 60%;
+			}
+		</style>
 		<script src="/AllIn/wechat/plugin/js/mui.min.js"></script>
 		<script src="/AllIn/wechat/plugin/js/mui.picker.min.js"></script>
 		<script type="text/javascript">
 			mui.init();
 			~function(){
+				var form = mui("#mainform")[0];
 				var path = window.location.pathname;
 				var lastPath = path.substring(path.lastIndexOf("/") + 1);
 				var idReg = /(\d+)\.\w/;
+				
 				if(idReg.test(lastPath)){
 					var id = RegExp.$1;
 					var url = "/AllIn/wechat/mrgfnr/" + id + ".do";
@@ -28,6 +35,9 @@
 							}
 						}
 					});
+					mui("#submitBtn")[0].innerHTML = "修改";
+					form.action = "/AllIn/wechat/mrgfnr/" + id + ".do";
+					form.method = "put";
 				}
 			}();
 		</script>
@@ -35,46 +45,90 @@
 
 	<body>
 		<div class="mui-content">
-			<form class="mui-input-group">
+			<form class="mui-input-group" id="mainform" action="/AllIn/wechat/mrgfnr.do" method="post">
 				<div class="mui-input-row">
 					<label>事件</label>
-					<input type="text" id="name" name="name" class="mui-input-clear" placeholder="请输入事件名称">
+					<input type="text" name="name" class="mui-input-clear" placeholder="请输入事件名称">
 				</div>
 				<div class="mui-input-row">
 					<label>类型</label>
-					<select>
-						<option>婚</option>
-						<option>丧</option>
-					</select>
+					<label id="type-picker" class="picker"></label>
+					<input type="hidden" id="type" name="type"/>
 				</div>
 				<div class="mui-input-row">
 					<label>费用</label>
-					<input type="number" class="mui-input-clear" />
+					<input type="number" name="fee" class="mui-input-clear" />
 				</div>
 				<div class="mui-input-row">
 					<label>日期</label>
-					<label id="date"></label>
-					<input type="hidden"/>
+					<label id="date-dpicker" class="picker" data-type="date"></label>
+					<input type="hidden" id="date" name="date"/>
 				</div>
 				<div <div class="mui-input-row">
 					<label>备注</label>
-					<textarea></textarea>
+					<textarea id=""></textarea>
 				</div>
 				<div class="mui-button-row">
-					<button type="button" class="mui-btn mui-btn-primary">确认</button>
-					<button type="button" class="mui-btn mui-btn-danger">取消</button>
+					<button type="submit" id="submitBtn" class="mui-btn mui-btn-primary">添加</button>
 				</div>
 			</form>
 		</div>
 		<script type="text/javascript" charset="UTF-8">
-			mui("#date")[0].addEventListener("click", function() {
-				var dtPicker = new mui.DtPicker();
-				dtPicker.show(function(selectItems) {
-					mui("#date")[0].innerHTML = selectItems.y.value
-					//alert(selectItems.y); //{text: "2016",value: 2016} 
-					//alert(selectItems.m); //{text: "05",value: "05"} 
-				})
-			})
+			mui.each(mui(".picker"), function(index, ele){
+				console.log(ele)
+				var id = this.getAttribute("id");
+				console.log(id);
+				if(/(.*)-([d])?picker/.test(id)){
+					console.log(RegExp.$2);
+					var targetId = RegExp.$1;
+					var isDatePicker = RegExp.$2 === 'd';
+				
+					ele.addEventListener("click", function() {
+						var picker;
+						var options = eval("get" + targetId + "Options()");
+						if(isDatePicker){
+							window.dtPickers = window.dtPickers || [];
+							picker = window.dtPickers[targetId];
+							if(!picker){
+								picker = new mui.DtPicker(options);
+								window.dtPickers[targetId] = picker;
+							}
+						}else{
+							window.pickers = window.pickers || [];
+							picker = window.pickers[targetId];
+							if(!picker){
+								picker = new mui.PopPicker();
+								picker.setData(options);
+								window.pickers[targetId] = picker;
+							}
+						}
+						picker.show(function(selectItems) {
+							if(isDatePicker){
+								ele.innerHTML = selectItems.text;
+								mui("#" + targetId)[0].value = selectItems.value;
+							}else{
+								ele.innerHTML = selectItems[0].text;
+								mui("#" + targetId)[0].value = selectItems[0].value;
+							}
+						})
+					});
+				}
+			});
+			
+			function getdateOptions(){
+				return {
+					type: "date"
+				};
+			}
+			function gettypeOptions(){
+				return [{
+					text: "婚",
+					value: "",
+				},{
+					text: "丧",
+					value: "",
+				}]
+			}
 		</script>
 	</body>
 
