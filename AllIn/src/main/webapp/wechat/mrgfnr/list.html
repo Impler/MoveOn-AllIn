@@ -14,12 +14,12 @@
 						var form = mui(".mui-input-group")[0];
 						var htmlStr = "<div class=\"mui-input-row mui-checkbox mui-left\">"
 								+ "	<div class=\"mui-navigate-right\">"
-								+ "		<div class=\"mui-row\">"
+								+ "		<div class=\"mui-row data-row\" data-id=\"{0}\">"
 								+ "			<div class=\"mui-col-sm-7 mui-col-xs-7\">"
-								+ "				<label>{0}</label>"
+								+ "				<label>{1}</label>"
 								+ "			</div>"
 								+ "			<div class=\"mui-col-sm-4 mui-col-xs-4\">"
-								+ "				<label>{1}</label>"
+								+ "				<label>{2}</label>"
 								+ "			</div>"
 								+ "		</div>"
 								+ "	</div>"
@@ -28,12 +28,18 @@
 								
 						for(var i=0; i<xhr.data.length; i++){
 							var data = xhr.data[i];
-							var html = htmlStr.format(data.name, data.fee);
+							var html = htmlStr.format(data.id, data.name, data.fee);
 							var tmpObj = document.createElement("div"); 
 							tmpObj.innerHTML = html; 
 							var dom = tmpObj.childNodes[0]; 
 							form.appendChild(dom);
 						}
+						mui.each(mui(".data-row"), function(index,item){
+							item.addEventListener("click", function(){
+								var id = this.getAttribute("data-id");
+								window.location.href = "../mrgfnr/detail/" + id + ".do";
+							});
+						});
 					} else {
 						console.error("errors occur......");
 					}
@@ -51,7 +57,7 @@
 				<form class="mui-input-group">
 					<div class="mui-input-row mui-checkbox mui-left">
 						<div class="mui-navigate-right">
-							<div class="mui-row">
+							<div class="mui-row data-row">
 								<div class="mui-col-sm-7 mui-col-xs-7">
 									<label>Item1</label>
 								</div>

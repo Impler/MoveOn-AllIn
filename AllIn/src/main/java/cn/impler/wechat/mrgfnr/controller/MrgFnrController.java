@@ -16,6 +16,7 @@ import cn.impler.wechat.mrgfnr.dto.Result;
 import cn.impler.wechat.mrgfnr.service.intf.MrgFnrEventService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 
 @Controller
 @RequestMapping("/wechat/mrgfnr")
@@ -24,6 +25,12 @@ public class MrgFnrController {
 	@Autowired
 	private MrgFnrEventService mfeService;
 	
+	private static final JsonConfig MrgFnrBeanIgnore;
+	
+	static{
+		MrgFnrBeanIgnore = new JsonConfig();
+		MrgFnrBeanIgnore.setExcludes(new String[]{"date", "createTime", "lastUpdateTime"});
+	}
 	/**
 	 * query marriage and funeral events by pagination
 	 * @param search
@@ -34,7 +41,7 @@ public class MrgFnrController {
 	@ResponseBody
 	public JSONObject query(MrgFnrEventSearchBean search, Pagination page){
 		List<MrgFnrEvent> es = mfeService.selectInPagination(search, page);
-		JSONArray esArray = JSONArray.fromObject(es);
+		JSONArray esArray = JSONArray.fromObject(es, MrgFnrBeanIgnore);
 		return Result.newSuccessResult(esArray).toJson();
 	}
 	

@@ -19,7 +19,13 @@
 					var id = RegExp.$1;
 					var url = "/AllIn/wechat/mrgfnr/" + id + ".do";
 					mui.ajax(url, {success : function(xhr){
-							console.log(xhr.data);
+							if (xhr.code == "0000") {
+								var data  = xhr.data;
+								var name = data.name;
+								mui("#name")[0].value = name;
+							}else{
+								alert("error");
+							}
 						}
 					});
 				}
@@ -32,7 +38,7 @@
 			<form class="mui-input-group">
 				<div class="mui-input-row">
 					<label>事件</label>
-					<input type="text" class="mui-input-clear" placeholder="请输入事件名称">
+					<input type="text" id="name" name="name" class="mui-input-clear" placeholder="请输入事件名称">
 				</div>
 				<div class="mui-input-row">
 					<label>类型</label>
