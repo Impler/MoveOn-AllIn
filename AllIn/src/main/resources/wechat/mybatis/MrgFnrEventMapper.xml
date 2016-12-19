@@ -9,12 +9,13 @@
 		<result column="type" property="type"/>
 		<result column="date" property="date"/>
 		<result column="fee" property="fee"/>
+		<result column="remark" property="remark"/>
 		<result column="create_time" property="createTime"/>
 		<result column="last_update_time" property="lastUpdateTime"/>
 	</resultMap>
 	
 	<select id="queryInPagination" resultMap="event">
-		SELECT ID, USER_ID, NAME, TYPE, DATE, FEE, CREATE_TIME, LAST_UPDATE_TIME FROM T_WECHAT_MRGFNR
+		SELECT ID, USER_ID, NAME, TYPE, DATE, FEE, REMARK, CREATE_TIME, LAST_UPDATE_TIME FROM T_WECHAT_MRGFNR
 	</select>
 	
 	<select id="count" resultType="int">
@@ -22,19 +23,19 @@
 	</select>
 	
 	<select id="selectOneByKey" resultMap="event">
-		SELECT ID, USER_ID, NAME, TYPE, DATE, FEE, CREATE_TIME, LAST_UPDATE_TIME 
+		SELECT ID, USER_ID, NAME, TYPE, DATE, FEE, REMARK, CREATE_TIME, LAST_UPDATE_TIME 
 		FROM T_WECHAT_MRGFNR
 		WHERE ID = #{id}
 	</select>
 	
 	<insert id="insert" parameterType="MrgFnrEvent" keyColumn="id" useGeneratedKeys="true">
-		INSERT INTO T_WECHAT_MRGFNR (USER_ID, NAME, TYPE, DATE, FEE, CREATE_TIME, LAST_UPDATE_TIME)
-		VALUES(#{userId}, #{name}, #{type}, #{date}, #{fee}, #{createTime}, #{lastUpdateTime})
+		INSERT INTO T_WECHAT_MRGFNR (USER_ID, NAME, TYPE, DATE, FEE, REMARK, CREATE_TIME, LAST_UPDATE_TIME)
+		VALUES(#{userId}, #{name}, #{type}, #{date}, #{fee}, #{remark}, now(), now())
 	</insert>
 	
 	<update id="update" parameterType="MrgFnrEvent">
 		UPDATE T_WECHAT_MRGFNR 
-		SET NAME = #{name}, TYPE = #{type}, FEE = #{fee}, DATE = #{date}, LAST_UPDATE_TIME = now()
+		SET NAME = #{name}, TYPE = #{type}, FEE = #{fee}, REMARK=#{remark}, DATE = #{date}, LAST_UPDATE_TIME = now()
 		WHERE ID = #{id}
 	</update>
 </mapper>

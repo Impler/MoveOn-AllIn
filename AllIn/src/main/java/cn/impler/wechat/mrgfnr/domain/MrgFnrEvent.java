@@ -2,6 +2,8 @@ package cn.impler.wechat.mrgfnr.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import cn.impler.common.util.DateFormatUtil;
 import cn.impler.wechat.mrgfnr.dmo.MrgFnrEventType;
 
@@ -20,9 +22,12 @@ public class MrgFnrEvent {
 	// event type
 	private MrgFnrEventType type;
 	// date of the event
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date;
 	// the costs
 	private float fee;
+	// the remark
+	private String remark; 
 	// create time
 	private Date createTime;
 	// last update time
@@ -92,6 +97,18 @@ public class MrgFnrEvent {
 		this.lastUpdateTime = lastUpdateTime;
 	}
 
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	
+	public int getTypeId(){
+		return this.type.getId();
+	}
+	
 	public String getFormatedDateStr(){
 		return DateFormatUtil.getDefaultFormtedDateStr(date);
 	}
@@ -102,13 +119,13 @@ public class MrgFnrEvent {
 	public String getFormatedLastUpdateTimeStr(){
 		return DateFormatUtil.getDefaultFormatedDatetimeStr(this.lastUpdateTime);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "MrgFnrEvent [id=" + id + ", userId=" + userId + ", name="
 				+ name + ", type=" + type + ", date=" + date + ", fee=" + fee
-				+ ", createTime=" + createTime + ", lastUpdateTime="
-				+ lastUpdateTime + "]";
+				+ ", remark=" + remark + ", createTime=" + getFormatedCreateTimeStr()
+				+ ", lastUpdateTime=" + getFormatedLastUpdateTimeStr() + "]";
 	}
 	
 }

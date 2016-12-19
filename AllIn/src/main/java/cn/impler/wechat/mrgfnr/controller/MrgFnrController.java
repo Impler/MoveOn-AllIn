@@ -29,7 +29,7 @@ public class MrgFnrController {
 	
 	static{
 		MrgFnrBeanIgnore = new JsonConfig();
-		MrgFnrBeanIgnore.setExcludes(new String[]{"date", "createTime", "lastUpdateTime"});
+		MrgFnrBeanIgnore.setExcludes(new String[]{"type", "date", "createTime", "lastUpdateTime"});
 	}
 	/**
 	 * query marriage and funeral events by pagination
@@ -51,10 +51,9 @@ public class MrgFnrController {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	@ResponseBody
-	public JSONObject add(MrgFnrEvent event){
+	public String add(MrgFnrEvent event){
 		mfeService.add(event);
-		return Result.newSuccessResult().toJson();
+		return "redirect:wechat/mrgfnr/list";
 	}
 	
 	/**
@@ -87,10 +86,9 @@ public class MrgFnrController {
 	 * @return
 	 */
 	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
-	@ResponseBody
-	public JSONObject update(MrgFnrEvent event){
+	public String update(MrgFnrEvent event){
 		mfeService.update(event);
-		return Result.newSuccessResult().toJson();
+		return "redirect:" + event.getId();
 	}
 	
 	/**

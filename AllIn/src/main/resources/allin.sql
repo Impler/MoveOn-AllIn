@@ -26,6 +26,7 @@ CREATE TABLE `t_wechat_mrgfnr` (
   `type` tinyint(11) DEFAULT NULL COMMENT 'event type id',
   `date` date DEFAULT NULL COMMENT 'date of the event',
   `fee` float DEFAULT NULL COMMENT 'the costs',
+  `remark` varchar(200) DEFAULT NULL COMMENT 'event remark',
   `create_time` datetime DEFAULT NULL COMMENT 'create time',
   `last_update_time` datetime DEFAULT NULL COMMENT 'last update time',
   PRIMARY KEY (`id`)
