@@ -8,13 +8,48 @@
 		<link href="/AllIn/wechat/plugin/css/mui.min.css" rel="stylesheet" />
 		<link href="/AllIn/wechat/plugin/css/mui.picker.min.css" rel="stylesheet" />
 		<style type="text/css">
-			.picker {
-				width: 60%;
+			.mui-input-row .picker {
+				/* 消除left padding */
+				padding-left: 0px;
 			}
 		</style>
 		<script src="/AllIn/wechat/plugin/js/mui.min.js"></script>
 		<script src="/AllIn/wechat/plugin/js/mui.picker.min.js"></script>
-		<script type="text/javascript">
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<form class="mui-input-group" id="mainform" action="/AllIn/wechat/mrgfnr.do" method="post">
+				<!-- make support PUT/DELETE method -->
+				<input type="hidden" id="_method" name="_method" value=""/>
+				<div class="mui-input-row">
+					<label>事件</label>
+					<input type="text" name="name" id="name" class="mui-input-clear" placeholder="请输入事件名称">
+				</div>
+				<div class="mui-input-row">
+					<label>类型</label>
+					<label id="type-picker" class="picker"></label>
+					<input type="hidden" id="type" name="type"/>
+				</div>
+				<div class="mui-input-row">
+					<label>费用</label>
+					<input type="number" id="fee" name="fee" class="mui-input-clear" step="0.01"/>
+				</div>
+				<div class="mui-input-row">
+					<label>日期</label>
+					<label id="date-dpicker" class="picker" data-type="date"></label>
+					<input type="hidden" id="date" name="date"/>
+				</div>
+				<div <div class="mui-input-row">
+					<label>备注</label>
+					<input type="text" id="remark" name="remark"/>
+				</div>
+				<div class="mui-button-row">
+					<button type="submit" id="submitBtn" class="mui-btn mui-btn-primary">添加</button>
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript" charset="UTF-8">
 			mui.init();
 			~function(){
 				var form = mui("#mainform")[0];
@@ -30,6 +65,13 @@
 								var data  = xhr.data;
 								var name = data.name;
 								mui("#name")[0].value = name;
+								mui("#fee")[0].value = data.fee;
+								mui("#remark")[0].value = data.remark;
+								mui("#date-dpicker")[0].innerHTML = data.formatedDateStr
+								var typeId = data.typeId;
+								var typeText = gettypeOptions()[typeId - 1].text;
+								mui("#type")[0].value = typeId;
+								mui("#type-picker")[0].innerHTML = typeText;
 							}else{
 								alert("error");
 							}
@@ -37,43 +79,10 @@
 					});
 					mui("#submitBtn")[0].innerHTML = "修改";
 					form.action = "/AllIn/wechat/mrgfnr/" + id + ".do";
-					form.method = "put";
+					mui("#_method")[0].value = "put";
 				}
 			}();
-		</script>
-	</head>
-
-	<body>
-		<div class="mui-content">
-			<form class="mui-input-group" id="mainform" action="/AllIn/wechat/mrgfnr.do" method="post">
-				<div class="mui-input-row">
-					<label>事件</label>
-					<input type="text" name="name" id="name" class="mui-input-clear" placeholder="请输入事件名称">
-				</div>
-				<div class="mui-input-row">
-					<label>类型</label>
-					<label id="type-picker" class="picker"></label>
-					<input type="hidden" id="type" name="type"/>
-				</div>
-				<div class="mui-input-row">
-					<label>费用</label>
-					<input type="number" name="fee" class="mui-input-clear" />
-				</div>
-				<div class="mui-input-row">
-					<label>日期</label>
-					<label id="date-dpicker" class="picker" data-type="date"></label>
-					<input type="hidden" id="date" name="date"/>
-				</div>
-				<div <div class="mui-input-row">
-					<label>备注</label>
-					<textarea id=""></textarea>
-				</div>
-				<div class="mui-button-row">
-					<button type="submit" id="submitBtn" class="mui-btn mui-btn-primary">添加</button>
-				</div>
-			</form>
-		</div>
-		<script type="text/javascript" charset="UTF-8">
+			
 			mui.each(mui(".picker"), function(index, ele){
 				console.log(ele)
 				var id = this.getAttribute("id");
@@ -123,10 +132,13 @@
 			function gettypeOptions(){
 				return [{
 					text: "婚",
-					value: "",
+					value: "1",
 				},{
 					text: "丧",
-					value: "",
+					value: "2",
+				},{
+					text: "生育",
+					value: "3",
 				}]
 			}
 		</script>
