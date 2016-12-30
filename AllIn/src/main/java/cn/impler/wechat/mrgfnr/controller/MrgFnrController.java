@@ -53,7 +53,7 @@ public class MrgFnrController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String add(MrgFnrEvent event){
 		mfeService.add(event);
-		return "redirect:wechat/mrgfnr/list";
+		return "wechat/mrgfnr/list";
 	}
 	
 	/**

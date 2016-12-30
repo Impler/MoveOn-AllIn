@@ -5,6 +5,23 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>全部</title>
 		<link href="/AllIn/wechat/plugin/css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.seach-header{
+				margin-top: 10px;
+			}
+			/* override mui stylesheet*/
+			.mui-search{
+				float: left;
+				margin-left: 10px;
+				width: 82%;
+			}
+			#addBtn {
+				float:right;
+				margin-right: 10px; 
+				font-size: 34px;
+			}
+			
+		</style>
 		<script type="text/javascript" src="/AllIn/wechat/js/common.js"></script>
 		<script type="text/javascript" src="/AllIn/wechat/plugin/js/mui.min.js"></script>
 		<script type="text/javascript" charset="UTF-8">
@@ -15,10 +32,10 @@
 						var htmlStr = "<div class=\"mui-input-row mui-checkbox mui-left\">"
 								+ "	<div class=\"mui-navigate-right\">"
 								+ "		<div class=\"mui-row data-row\" >"
-								+ "			<div class=\"mui-col-sm-7 mui-col-xs-7\">"
+								+ "			<div class=\"mui-col-sm-7 mui-col-xs-6\">"
 								+ "				<label>{1}</label>"
 								+ "			</div>"
-								+ "			<div class=\"mui-col-sm-4 mui-col-xs-4 data-target\" data-id=\"{0}\">"
+								+ "			<div class=\"mui-col-sm-4 mui-col-xs-5 data-target\" data-id=\"{0}\">"
 								+ "				<label>{2}</label>"
 								+ "			</div>"
 								+ "		</div>"
@@ -50,9 +67,13 @@
 
 	<body>
 		<div class="mui-content">
-			<div class="mui-input-row mui-search">
-				<input type="search" class="mui-input-clear" placeholder="">
+			<div class="seach-header">
+				<div class="mui-input-row mui-search">
+					<input type="search" class="mui-input-clear" placeholder="">
+				</div>
+				<span class="mui-icon mui-icon-plusempty" id="addBtn"></span>
 			</div>
+			<div style="clear:both"></div>
 			<div class="mui-card">
 				<form class="mui-input-group">
 					<div class="mui-input-row mui-checkbox mui-left">
@@ -84,6 +105,10 @@
 				</form>
 			</div>
 		</div>
+		<script type="text/javascript">
+			mui("#addBtn")[0].addEventListener("click", function(){
+				window.location.href = '/AllIn/wechat/mrgfnr/new.html';
+			});
+		</script>
 	</body>
-
 </html>
