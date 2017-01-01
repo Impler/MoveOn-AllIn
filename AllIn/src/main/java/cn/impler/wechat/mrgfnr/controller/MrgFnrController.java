@@ -88,7 +88,7 @@ public class MrgFnrController {
 	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
 	public String update(MrgFnrEvent event){
 		mfeService.update(event);
-		return "redirect:" + event.getId();
+		return "redirect:detail/" + event.getId() + ".do";
 	}
 	
 	/**

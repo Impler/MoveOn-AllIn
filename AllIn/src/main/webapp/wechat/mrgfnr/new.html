@@ -67,7 +67,8 @@
 								mui("#name")[0].value = name;
 								mui("#fee")[0].value = data.fee;
 								mui("#remark")[0].value = data.remark;
-								mui("#date-dpicker")[0].innerHTML = data.formatedDateStr
+								mui("#date-dpicker")[0].innerHTML = data.formatedDateStr;
+								mui("#date")[0].value = data.formatedDateStr;
 								var typeId = data.typeId;
 								var typeText = gettypeOptions()[typeId - 1].text;
 								mui("#type")[0].value = typeId;
@@ -86,7 +87,6 @@
 			mui.each(mui(".picker"), function(index, ele){
 				console.log(ele)
 				var id = this.getAttribute("id");
-				console.log(id);
 				if(/(.*)-([d])?picker/.test(id)){
 					console.log(RegExp.$2);
 					var targetId = RegExp.$1;
@@ -99,6 +99,7 @@
 							window.dtPickers = window.dtPickers || [];
 							picker = window.dtPickers[targetId];
 							if(!picker){
+								options.value = this.innerHTML || '';
 								picker = new mui.DtPicker(options);
 								window.dtPickers[targetId] = picker;
 							}
@@ -126,7 +127,8 @@
 			
 			function getdateOptions(){
 				return {
-					type: "date"
+					type: "date",
+					value: ''
 				};
 			}
 			function gettypeOptions(){
