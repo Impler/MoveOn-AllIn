@@ -14,12 +14,26 @@
 		<result column="last_update_time" property="lastUpdateTime"/>
 	</resultMap>
 	
-	<select id="queryInPagination" resultMap="event">
-		SELECT ID, USER_ID, NAME, TYPE, DATE, FEE, REMARK, CREATE_TIME, LAST_UPDATE_TIME FROM T_WECHAT_MRGFNR
+	<sql id="likeQuery">
+		<if test="name != null and name != ''">
+			<bind name="likeName" value="'%' + _parameter.getName() + '%'"/>
+			NAME LIKE #{likeName}
+		</if>
+	</sql>
+	
+	<select id="queryInPagination" parameterType="MrgFnrEventSearchBean" resultMap="event">
+		SELECT ID, USER_ID, NAME, TYPE, DATE, FEE, REMARK, CREATE_TIME, LAST_UPDATE_TIME 
+		FROM T_WECHAT_MRGFNR
+		<where>
+			<include refid="likeQuery"></include>
+		</where>
 	</select>
 	
 	<select id="count" resultType="int">
 		SELECT COUNT(1) FROM T_WECHAT_MRGFNR
+		<where>
+			<include refid="likeQuery"></include>
+		</where>
 	</select>
 	
 	<select id="selectOneByKey" resultMap="event">

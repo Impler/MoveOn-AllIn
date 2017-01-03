@@ -2,6 +2,10 @@ package cn.impler.wechat.mrgfnr.controller;
 
 import java.util.List;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,12 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.impler.framework.mybatis.dao.dto.Pagination;
 import cn.impler.wechat.mrgfnr.domain.MrgFnrEvent;
-import cn.impler.wechat.mrgfnr.dto.MrgFnrEventSearchBean;
+import cn.impler.wechat.mrgfnr.domain.MrgFnrEventSearchBean;
 import cn.impler.wechat.mrgfnr.dto.Result;
 import cn.impler.wechat.mrgfnr.service.intf.MrgFnrEventService;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 
 @Controller
 @RequestMapping("/wechat/mrgfnr")

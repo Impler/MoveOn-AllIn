@@ -190,6 +190,8 @@
                 <version>2.2</version>
                 <configuration>
                 	<port>8080</port>
+                	<!-- important -->
+                	<uriEncoding>UTF-8</uriEncoding>
                     <path>/AllIn</path>
                 </configuration>
             </plugin>
