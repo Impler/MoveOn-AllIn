@@ -23,7 +23,7 @@
 		class="cn.impler.framework.mybatis.dao.spring.EnhancedSqlSessionFactoryBean"
 		p:dataSource-ref="dataSource" 
 		p:mapperLocations="classpath*:**/mybatis/*Mapper.xml"
-		p:typeAliasesPackage="cn.impler.wechat.mrgfnr.domain">
+		p:typeAliasesPackage="cn.impler.wechat.mrgfnr.domain,cn.impler.auth.domain">
 		<property name="plugins">
 			<array>
 				<bean class="cn.impler.framework.mybatis.dao.plugin.PaginationPlugin">

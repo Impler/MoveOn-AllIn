@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.impler.auth.dao.RoleDao">
+	
+	<resultMap type="Role" id="role">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="description" property="description"/>
+	</resultMap>
+	
+	<insert id="insert" parameterType="Role">
+		INSERT INTO T_AUTH_ROLE (ID, NAME, DESCRIPTION) VALUE(#{id}, #{name}, #{description})
+	</insert>
+	
+	<select id="selectOneByKey" resultMap="role">
+		SELECT ID, NAME, DESCRIPTION FROM T_AUTH_ROLE WHERE ID = #{id}
+	</select>
+	
+	<!-- query in pagination -->
+	<sql id="likeStmt">
+		<if test="null != name and name != ''">
+			<bind name="likeName" value="'%' + _parameter.getName() + '%'"/>
+			NAME LIKE #{likeName}
+		</if>
+	</sql>
+	<select id="selectByPaginationCount" resultType="int">
+		SELECT COUNT(ID) FROM T_AUTH_ROLE
+		<where>
+			<include refid="likeStmt" />
+		</where>
+	</select>
+	<select id="selectByPagination" resultMap="role">
+		SELECT ID, NAME, DESCRIPTION FROM T_AUTH_ROLE
+		<where>
+			<include refid="likeStmt" />
+		</where>
+	</select>
+</mapper>
