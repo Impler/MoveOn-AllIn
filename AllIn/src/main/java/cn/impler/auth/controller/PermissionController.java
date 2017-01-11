@@ -11,14 +11,18 @@ import cn.impler.auth.service.PermissionService;
 
 @Controller
 @RequestMapping("/auth/permission")
-public class PermissionController extends AbsAuthController<Permission, PermissionSearchBean>{
+public class PermissionController 
+		extends AbsAuthController<Permission, Integer, PermissionSearchBean>{
 
 	@Autowired
 	private PermissionService permissionService;
 
 	@Override
-	public AuthService<Permission, PermissionSearchBean> getAuthService() {
+	public AuthService<Permission, Integer, PermissionSearchBean> getAuthService() {
 		return permissionService;
 	}
+
+	
+
 	
 }

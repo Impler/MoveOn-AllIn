@@ -11,15 +11,17 @@ import cn.impler.auth.service.RoleService;
 
 @Controller
 @RequestMapping("/auth/role")
-public class RoleController extends AbsAuthController<Role, RoleSearchBean>{
+public class RoleController 
+		extends AbsAuthController<Role, Integer, RoleSearchBean>{
 
 	@Autowired
 	private RoleService roleService;
-	
+
 	@Override
-	public AuthService<Role, RoleSearchBean> getAuthService() {
+	public AuthService<Role, Integer, RoleSearchBean> getAuthService() {
 		return roleService;
 	}
+	
 
 	
 	

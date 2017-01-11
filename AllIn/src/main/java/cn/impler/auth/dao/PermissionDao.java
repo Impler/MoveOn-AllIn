@@ -1,8 +1,13 @@
 package cn.impler.auth.dao;
 
 import cn.impler.auth.domain.Permission;
-import cn.impler.framework.mybatis.dao.intf.BaseDao;
+import cn.impler.auth.domain.dto.PermissionSearchBean;
 
-public interface PermissionDao extends BaseDao<Permission, Integer> {
+/**
+ * permission dao
+ * @author impler
+ * @date 2017-01-11
+ */
+public interface PermissionDao extends AuthDao<Permission, Integer, PermissionSearchBean> {
 
 }

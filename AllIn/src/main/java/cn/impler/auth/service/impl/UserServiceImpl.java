@@ -1,27 +1,35 @@
 package cn.impler.auth.service.impl;
 
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.impler.auth.dao.AuthDao;
+import cn.impler.auth.dao.UserDao;
 import cn.impler.auth.domain.User;
 import cn.impler.auth.domain.dto.UserSearchBean;
+import cn.impler.auth.service.AbsAuthService;
 import cn.impler.auth.service.UserService;
-import cn.impler.framework.mybatis.dao.dto.Pagination;
 
+/**
+ * user service implement
+ * @author impler
+ * @date 2017-01-11
+ */
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl 
+		extends AbsAuthService<User, Integer, UserSearchBean> 
+		implements UserService {
+
+	@Autowired
+	private UserDao userDao;
 
 	@Override
-	public int add(User role) {
-		// TODO Auto-generated method stub
-		return 0;
+	protected AuthDao<User, Integer, UserSearchBean> getAuthDao() {
+		return userDao;
 	}
 
-	@Override
-	public List<User> selectInPagination(UserSearchBean search, Pagination page) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
+	
 
 }

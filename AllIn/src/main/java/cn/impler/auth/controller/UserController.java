@@ -11,15 +11,16 @@ import cn.impler.auth.service.UserService;
 
 @Controller
 @RequestMapping("/auth/user")
-public class UserController extends AbsAuthController<User, UserSearchBean>{
+public class UserController 
+		extends AbsAuthController<User, Integer, UserSearchBean>{
 
 	@Autowired
 	private UserService userService;
 
 	@Override
-	public AuthService<User, UserSearchBean> getAuthService() {
+	public AuthService<User, Integer, UserSearchBean> getAuthService() {
 		return userService;
 	}
-	
+
 
 }

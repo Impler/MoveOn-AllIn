@@ -1,28 +1,34 @@
 package cn.impler.auth.service.impl;
 
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.impler.auth.dao.AuthDao;
+import cn.impler.auth.dao.PermissionDao;
 import cn.impler.auth.domain.Permission;
 import cn.impler.auth.domain.dto.PermissionSearchBean;
+import cn.impler.auth.service.AbsAuthService;
 import cn.impler.auth.service.PermissionService;
-import cn.impler.framework.mybatis.dao.dto.Pagination;
 
+/**
+ * permission service implement
+ * @author impler
+ * @date 2017-01-11
+ */
 @Service("permissionService")
-public class PermissionServiceImpl implements PermissionService {
+public class PermissionServiceImpl extends 
+		AbsAuthService<Permission, Integer, PermissionSearchBean> 
+		implements PermissionService {
 
+	@Autowired
+	private PermissionDao permissionDao;
+	
 	@Override
-	public int add(Permission role) {
-		// TODO Auto-generated method stub
-		return 0;
+	protected AuthDao<Permission, Integer, PermissionSearchBean> getAuthDao() {
+		return permissionDao;
 	}
 
-	@Override
-	public List<Permission> selectInPagination(PermissionSearchBean search,
-			Pagination page) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+
 
 }

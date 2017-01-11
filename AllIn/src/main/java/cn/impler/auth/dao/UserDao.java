@@ -1,8 +1,13 @@
 package cn.impler.auth.dao;
 
 import cn.impler.auth.domain.User;
-import cn.impler.framework.mybatis.dao.intf.BaseDao;
+import cn.impler.auth.domain.dto.UserSearchBean;
 
-public interface UserDao extends BaseDao<User, Integer> {
+/**
+ * user dao
+ * @author impler
+ * @date 2017-01-11
+ */
+public interface UserDao extends AuthDao<User, Integer, UserSearchBean> {
 
 }
