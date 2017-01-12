@@ -35,4 +35,11 @@ public interface AuthService<E, K, S> {
 	 * @return
 	 */
 	int deleteById(K id);
+	
+	/**
+	 * update a entity
+	 * @param e
+	 * @return
+	 */
+	int update(E e);
 }

@@ -39,8 +39,8 @@ public abstract class AbsAuthService<E, K, S>
 		return this.getAuthDao().delete(id);
 	}
 
-
-	
-	
-	
+	@Override
+	public int update(E e) {
+		return this.getAuthDao().update(e);
+	}
 }

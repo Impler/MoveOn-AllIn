@@ -24,4 +24,9 @@ public class Role extends BaseDomain {
 		this.description = description;
 	}
 
+	@Override
+	public String toString() {
+		return "Role [name=" + name + ", description=" + description + "]";
+	}
+
 }

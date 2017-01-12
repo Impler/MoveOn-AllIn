@@ -17,8 +17,21 @@ import cn.impler.auth.service.AuthService;
 import cn.impler.framework.mybatis.dao.dto.Pagination;
 import cn.impler.wechat.mrgfnr.dto.Result;
 
+/**
+ * 
+ * @author impler
+ * @date 2017-01-12
+ * @param <E> entity class
+ * @param <K> entity id
+ * @param <S> entity search key word
+ */
 public abstract class AbsAuthController<E, K, S> {
 
+	/**
+	 * abstract function, which depends on sub-class' implement
+	 * and return the actual AuthService implements
+	 * @return
+	 */
 	public abstract AuthService<E, K, S> getAuthService();
 	
 	protected Map<OperateType, String> resultMappings = getResultMappings();
@@ -41,7 +54,7 @@ public abstract class AbsAuthController<E, K, S> {
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public JSONObject query(S search, Pagination page){
-		List<E> rs = getAuthService().selectInPagination(search, page);
+		List<E> rs = this.getAuthService().selectInPagination(search, page);
 		JSONArray esArray = JSONArray.fromObject(rs);
 		return Result.newSuccessResult(esArray, page).toJson();
 	}
@@ -53,14 +66,30 @@ public abstract class AbsAuthController<E, K, S> {
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String add(E e){
-		getAuthService().add(e);
+		this.getAuthService().add(e);
 		return resultMappings.get(OperateType.ADD);
 	}
 	
-	@RequestMapping("/{id}")
+	/**
+	 * delete a entity by id
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public JSONObject deleteById(@PathVariable K id){
-		getAuthService().deleteById(id);
+		this.getAuthService().deleteById(id);
+		return Result.newSuccessResult().toJson();
+	}
+	
+	/**
+	 * update a entity
+	 * @param e
+	 * @return
+	 */
+	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
+	public JSONObject update(E e){
+		this.getAuthService().update(e);
 		return Result.newSuccessResult().toJson();
 	}
 }
