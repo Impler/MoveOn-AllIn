@@ -16,7 +16,7 @@ public class RoleControllerTest extends WebTestBase{
 	public void testQuery() throws Exception {
 		MvcResult rs = super.mockMvc
 				.perform(MockMvcRequestBuilders.get("/auth/role.do")
-						.accept(MediaType.parseMediaType("text/html")))
+						.accept(MediaType.parseMediaType("application/json")))
 				.andDo(MockMvcResultHandlers.print())
 				.andReturn();
 		
