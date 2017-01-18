@@ -2,6 +2,7 @@ package cn.impler.common.swagger.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
 import com.mangofactory.swagger.models.dto.ApiInfo;
@@ -10,7 +11,7 @@ import com.mangofactory.swagger.plugin.SwaggerSpringMvcPlugin;
 
 // to see web-swagger.xml
 // register this bean by xml, only work in web application context
-//@Configuration
+@Configuration
 @EnableSwagger
 public class SwaggerConfig {
 	

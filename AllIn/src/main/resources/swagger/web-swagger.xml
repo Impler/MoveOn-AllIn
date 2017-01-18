@@ -12,9 +12,9 @@
 		http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-        
-	<!-- register swagger config bean by xml instead of @Configuration 
-		to support local bean context test case 
-	-->
-	<bean class="cn.impler.common.swagger.config.SwaggerConfig" />
+
+	<!-- registe swagger beans -->
+	<context:component-scan base-package="com.mangofactory.swagger" />
+	<context:component-scan base-package="cn.impler.common.swagger.config" />
+	
 </beans>
