@@ -86,7 +86,7 @@
 		<!-- Mybatis plugins s -->
 		<dependency>
 			<groupId>cn.impler.framework</groupId>
-			<artifactId>dao</artifactId>
+			<artifactId>mybatis-dao</artifactId>
 			<version>${version.impler-dao}</version>
 		</dependency>
 		<!-- Mybatis plugins s -->
