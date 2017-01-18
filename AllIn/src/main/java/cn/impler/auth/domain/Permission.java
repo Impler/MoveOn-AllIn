@@ -1,15 +1,20 @@
 package cn.impler.auth.domain;
 
+import cn.impler.auth.dto.RequestMethodType;
+
 public class Permission extends BaseDomain {
 
-	// 权限名称
+	// permission name
 	private String name;
 
-	// 权限级别
+	// permission level
 	private int level;
 
-	// 权限路径
+	// permission path
 	private String path;
+
+	// permission type
+	private RequestMethodType type = RequestMethodType.ALL;
 
 	public String getName() {
 		return name;
@@ -33,6 +38,14 @@ public class Permission extends BaseDomain {
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	public RequestMethodType getType() {
+		return type;
+	}
+
+	public void setType(RequestMethodType type) {
+		this.type = type;
 	}
 
 }

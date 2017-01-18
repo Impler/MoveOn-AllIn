@@ -2,10 +2,10 @@ package cn.impler.auth.domain;
 
 public class Role extends BaseDomain {
 
-	// 角色名称
+	// role name
 	private String name;
 
-	// 角色描述
+	// role description
 	private String description;
 
 	public String getName() {

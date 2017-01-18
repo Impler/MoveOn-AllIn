@@ -2,13 +2,13 @@ package cn.impler.auth.domain;
 
 public class User extends BaseDomain{
 
-	// 用户名
+	// username
 	private String username;
-	// 昵称
+	// nickname
 	private String nickname;
-	// 密码
+	// password
 	private String password;
-	// 密码盐值
+	// password salt
 	private String salt;
 
 	public String getUsername() {

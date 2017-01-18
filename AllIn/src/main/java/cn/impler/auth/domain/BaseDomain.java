@@ -2,7 +2,7 @@ package cn.impler.auth.domain;
 
 public abstract class BaseDomain {
 
-	// 编号
+	// id
 	private int id;
 
 	public int getId() {
