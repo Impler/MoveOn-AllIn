@@ -1,8 +1,14 @@
-package cn.impler.wechat.mrgfnr.dto;
+package cn.impler.common.dto;
 
 import java.io.Serializable;
+import java.util.List;
+
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 
 import cn.impler.framework.mybatis.dao.dto.Pagination;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class Result implements Serializable{
@@ -12,6 +18,10 @@ public class Result implements Serializable{
 	public static final String RESULT_DATA_KEY = "data";
 	public static final String RESULT_MESSAGE_KEY = "message";
 	public static final String RESULT_PAGE_KEY = "page";
+	public static final String RESULT_ILLEGAL_PARA_OBJECT_KEY = "object";
+	public static final String RESULT_ILLEGAL_PARA_FIELD_KEY = "field";
+	public static final String RESULT_ILLEGAL_PARA_VAULE_KEY = "value";
+	public static final String RESULT_ILLEGAL_PARA_MSG_KEY = "message";
 	
 	// data code 
 	private ResultCode code;
@@ -90,8 +100,12 @@ public class Result implements Serializable{
 	}
 	
 	public static enum ResultCode{
-		
-		SUCCESS("0000"), Failure("9999");
+		// operate successfully
+		SUCCESS("0000"),
+		// illegal request parameters
+		ILLEGALPARA("1000"),
+		// operate fail
+		Failure("9999");
 		
 		private String code;
 
@@ -129,6 +143,23 @@ public class Result implements Serializable{
 	
 	public static Result newResult(ResultCode code, Object data, Pagination page, String message) {
 		return new Result(code, data, page, message);
+	}
+
+	public static Result newResult(BindingResult validateResult) {
+		List<ObjectError> errors = validateResult.getAllErrors();
+		JSONArray errMsgs = new JSONArray();
+		for(ObjectError err : errors){
+			JSONObject errMsg = new JSONObject();
+			errMsg.put(RESULT_ILLEGAL_PARA_OBJECT_KEY, err.getObjectName());
+			errMsg.put(RESULT_ILLEGAL_PARA_MSG_KEY, err.getDefaultMessage());
+			if(err instanceof FieldError){
+				FieldError fe = (FieldError) err;
+				errMsg.put(RESULT_ILLEGAL_PARA_FIELD_KEY, fe.getField());
+				errMsg.put(RESULT_ILLEGAL_PARA_VAULE_KEY, fe.getRejectedValue());
+			}
+			errMsgs.add(errMsg);
+		}
+		return newResult(ResultCode.ILLEGALPARA, errMsgs);
 	}
 }
 

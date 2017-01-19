@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.impler.common.dto.Result;
 import cn.impler.framework.mybatis.dao.dto.Pagination;
 import cn.impler.wechat.mrgfnr.domain.MrgFnrEvent;
 import cn.impler.wechat.mrgfnr.domain.MrgFnrEventSearchBean;
-import cn.impler.wechat.mrgfnr.dto.Result;
 import cn.impler.wechat.mrgfnr.service.intf.MrgFnrEventService;
 
 @Controller

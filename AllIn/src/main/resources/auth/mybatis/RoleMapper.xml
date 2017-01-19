@@ -9,7 +9,7 @@
 	</resultMap>
 	
 	<insert id="insert" parameterType="Role">
-		INSERT INTO T_AUTH_ROLE (ID, NAME, DESCRIPTION) VALUE(#{id}, #{name}, #{description})
+		INSERT INTO T_AUTH_ROLE (NAME, DESCRIPTION) VALUE(#{name}, #{description})
 	</insert>
 	
 	<select id="selectOneByKey" resultMap="role">

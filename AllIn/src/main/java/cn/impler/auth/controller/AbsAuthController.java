@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.impler.auth.dto.OperateType;
 import cn.impler.auth.service.AuthService;
+import cn.impler.common.dto.Result;
 import cn.impler.framework.mybatis.dao.dto.Pagination;
-import cn.impler.wechat.mrgfnr.dto.Result;
 
 /**
  * 
@@ -68,9 +68,14 @@ public abstract class AbsAuthController<E, K, S> {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public String add(@Valid E e, BindingResult validateRt){
-		this.getAuthService().add(e);
-		return resultMappings.get(OperateType.ADD);
+	@ResponseBody
+	public JSONObject add(@Valid E e, BindingResult validateRt){
+		if(validateRt.hasErrors()){
+			return Result.newResult(validateRt).toJson();
+		}else{
+			this.getAuthService().add(e);
+			return Result.newSuccessResult().toJson();
+		}
 	}
 	
 	/**
