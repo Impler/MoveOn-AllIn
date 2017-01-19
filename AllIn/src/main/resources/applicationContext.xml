@@ -14,5 +14,5 @@
 		<context:exclude-filter type="annotation" expression="com.mangofactory.swagger.plugin.EnableSwagger"/>
 	</context:component-scan>
 	
-	<import resource="classpath:**/beans-*.xml" />
+	<import resource="classpath*:beans-*.xml" />
 </beans>
