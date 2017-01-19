@@ -1,8 +1,11 @@
 package cn.impler.auth.domain;
 
+import javax.validation.constraints.NotNull;
+
 public class Role extends BaseDomain {
 
 	// role name
+	@NotNull(message="{role.name}")
 	private String name;
 
 	// role description

@@ -24,8 +24,13 @@ public class RoleControllerTest extends WebTestBase{
 	}
 
 	@Test
-	public void testAdd() {
-		fail("Not yet implemented");
+	public void testAdd() throws Exception {
+		MvcResult rs = super.mockMvc
+				.perform(MockMvcRequestBuilders.post("/auth/role.do")
+						.accept(MediaType.parseMediaType("application/json")))
+				.andDo(MockMvcResultHandlers.print())
+				.andReturn();
+		System.out.println(rs);
 	}
 
 	@Test

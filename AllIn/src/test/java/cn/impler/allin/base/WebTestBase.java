@@ -14,7 +14,7 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringJUnit4ClassRunner.class)
 //@WebAppConfiguration annotation should be used 
 //in conjunction with @ContextConfiguration annotation
-@WebAppConfiguration()
+@WebAppConfiguration
 @ContextHierarchy({
     @ContextConfiguration(name = "parent", locations = "/applicationContext.xml"),
     @ContextConfiguration(name = "child", locations = "file:src/main/webapp/WEB-INF/spring-servlet.xml")

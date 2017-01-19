@@ -4,9 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -65,7 +68,7 @@ public abstract class AbsAuthController<E, K, S> {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public String add(E e){
+	public String add(@Valid E e, BindingResult validateRt){
 		this.getAuthService().add(e);
 		return resultMappings.get(OperateType.ADD);
 	}
