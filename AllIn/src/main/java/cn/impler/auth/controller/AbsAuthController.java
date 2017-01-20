@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.impler.auth.domain.dto.FooKey;
 import cn.impler.auth.dto.OperateType;
 import cn.impler.auth.service.AuthService;
 import cn.impler.common.dto.Result;
@@ -81,13 +82,20 @@ public abstract class AbsAuthController<E, K, S> {
 	/**
 	 * delete a entity by id
 	 * @param id
+	 * @param key a compromised way to validate PathVariable by spring
+	 * this variable is useless except in Spring variables binding validation 
+	 * @param validateRt
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public JSONObject deleteById(@PathVariable K id){
-		this.getAuthService().deleteById(id);
-		return Result.newSuccessResult().toJson();
+	public JSONObject deleteById(@PathVariable K id, @Valid FooKey key, BindingResult validateRt){
+		if(validateRt.hasErrors()){
+			return Result.newResult(validateRt).toJson();
+		}else{
+			this.getAuthService().deleteById(id);
+			return Result.newSuccessResult().toJson();
+		}
 	}
 	
 	/**

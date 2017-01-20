@@ -3,15 +3,20 @@ package cn.impler.allin.auth.controller;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import cn.impler.allin.base.WebTestBase;
+import cn.impler.auth.dao.RoleDao;
 
 public class RoleControllerTest extends WebTestBase{
 
+	@Autowired
+	private RoleDao roleDao;
+	
 	@Test
 	public void testQuery() throws Exception {
 		MvcResult rs = super.mockMvc
@@ -34,8 +39,14 @@ public class RoleControllerTest extends WebTestBase{
 	}
 
 	@Test
-	public void testDeleteById() {
-		fail("Not yet implemented");
+	public void testDeleteById() throws Exception {
+		// no id 
+		MvcResult rs = super.mockMvc
+				.perform(MockMvcRequestBuilders.delete("/auth/role/.do")
+						.accept(MediaType.parseMediaType("application/json")))
+				.andDo(MockMvcResultHandlers.print())
+				.andReturn();
+		System.out.println(rs);
 	}
 
 	@Test
