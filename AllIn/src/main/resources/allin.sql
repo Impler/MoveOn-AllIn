@@ -10,10 +10,47 @@ Target Server Type    : MYSQL
 Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2016-11-29 17:57:53
+Date: 2017-01-22 11:11:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for t_auth_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `t_auth_permission`;
+CREATE TABLE `t_auth_permission` (
+  `id` int(11) NOT NULL COMMENT 'permission id',
+  `name` varchar(50) DEFAULT NULL COMMENT 'permission name',
+  `level` int(11) DEFAULT NULL COMMENT 'permission level',
+  `path` varchar(50) DEFAULT NULL COMMENT 'permission path',
+  `type` varchar(10) DEFAULT NULL COMMENT 'request method（get/post/delete/put）',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for t_auth_role
+-- ----------------------------
+DROP TABLE IF EXISTS `t_auth_role`;
+CREATE TABLE `t_auth_role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'role id',
+  `name` varchar(30) DEFAULT NULL COMMENT 'role name',
+  `description` varchar(64) DEFAULT NULL COMMENT 'role description',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for t_auth_user
+-- ----------------------------
+DROP TABLE IF EXISTS `t_auth_user`;
+CREATE TABLE `t_auth_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'user id',
+  `username` varchar(32) DEFAULT NULL COMMENT 'username',
+  `nickname` varchar(50) DEFAULT NULL COMMENT 'useralt nick name',
+  `password` varchar(64) DEFAULT NULL COMMENT 'user password',
+  `salt` varchar(64) DEFAULT NULL COMMENT 'user password salt',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for t_wechat_mrgfnr
@@ -30,9 +67,4 @@ CREATE TABLE `t_wechat_mrgfnr` (
   `create_time` datetime DEFAULT NULL COMMENT 'create time',
   `last_update_time` datetime DEFAULT NULL COMMENT 'last update time',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_wechat_mrgfnr
--- ----------------------------
-INSERT INTO `t_wechat_mrgfnr` VALUES ('1', '10001', 'testname', '1', '2016-11-29', '1212', '2016-11-29 10:01:42', '2016-11-29 10:01:45');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
