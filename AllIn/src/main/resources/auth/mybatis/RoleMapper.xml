@@ -35,4 +35,7 @@
 			<include refid="likeStmt" />
 		</where>
 	</select>
+	<delete id="delete" parameterType="int">
+		DELETE FROM T_AUTH_ROLE WHERE ID = #{id}
+	</delete>
 </mapper>

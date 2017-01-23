@@ -32,7 +32,9 @@ public class RoleControllerTest extends WebTestBase{
 	public void testAdd() throws Exception {
 		MvcResult rs = super.mockMvc
 				.perform(MockMvcRequestBuilders.post("/auth/role.do")
-						.accept(MediaType.parseMediaType("application/json")))
+						.accept(MediaType.parseMediaType("application/json"))
+						.param("name", "管理员角色")
+						.param("description", "管理员角色"))
 				.andDo(MockMvcResultHandlers.print())
 				.andReturn();
 		System.out.println(rs);
