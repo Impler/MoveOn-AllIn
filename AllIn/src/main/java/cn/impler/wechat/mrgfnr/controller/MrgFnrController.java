@@ -43,7 +43,7 @@ public class MrgFnrController {
 	public JSONObject query(MrgFnrEventSearchBean search, Pagination page){
 		List<MrgFnrEvent> es = mfeService.selectInPagination(search, page);
 		JSONArray esArray = JSONArray.fromObject(es, MrgFnrBeanIgnore);
-		return Result.newSuccessResult(esArray).toJson();
+		return Result.newSuccessResult(esArray, page).toJson();
 	}
 	
 	/**
