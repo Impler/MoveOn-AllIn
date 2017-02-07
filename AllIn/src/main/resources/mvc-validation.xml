@@ -13,8 +13,6 @@
 		http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	
-	<mvc:annotation-driven validator="validator"/>
-	
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
         <property name="providerClass"  value="org.hibernate.validator.HibernateValidator"/>
         <!--default is ValidationMessages.properties in the classpath -->
