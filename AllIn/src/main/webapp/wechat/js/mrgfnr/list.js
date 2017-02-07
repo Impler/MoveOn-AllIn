@@ -6,10 +6,9 @@ mui.init({
 		up : {
 			contentrefresh : '正在加载...',
 			callback : function(){
-				var pullInfo = mui("#pullInfo")[0];
-				pullInfo.classList.add("mui-hidden");
+				mui("#pullInfo")[0].classList.add("mui-hidden");
 				getMoreData();
-				pullInfo.classList.remove("mui-hidden");
+				
 			}
 		}
 	}
@@ -22,7 +21,7 @@ function getMoreData() {
 		dataType : "json",
 		data : {
 			name : mui("#searchName")[0].value, 
-			currentPage : CURR_PAGE
+			currentPage : CURR_PAGE + 1
 		},
 		success : function(xhr) {
 			callback(xhr);
@@ -90,14 +89,14 @@ function callback(xhr) {
 
 				// use HTML5 querySelector API
 				var detailTarget = item.querySelector(".data-detail");
-				detailTarget.addEventListener("click", function() {
+				detailTarget.addEventListener("tap", function() {
 					var id = this.getAttribute("data-id");
 					window.location.href = "/AllIn/wechat/mrgfnr/detail/" + id
 							+ ".do";
 				});
 
 				var delTarget = item.querySelector(".data-event");
-				delTarget.addEventListener("click", function() {
+				delTarget.addEventListener("tap", function() {
 					var id = this.getAttribute("data-id");
 					mui.ajax("/AllIn/wechat/mrgfnr/{0}.do".format(id), {
 						dataType : "json",
@@ -115,6 +114,7 @@ function callback(xhr) {
 			});
 		}
 		mui('#pullrefresh').pullRefresh().endPullupToRefresh();
+		mui("#pullInfo")[0].classList.remove("mui-hidden");
 	} else {
 		console.error("errors occur......");
 	}
