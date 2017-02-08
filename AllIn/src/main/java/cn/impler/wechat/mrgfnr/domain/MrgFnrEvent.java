@@ -5,7 +5,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import cn.impler.common.util.DateFormatUtil;
-import cn.impler.wechat.mrgfnr.dmo.MrgFnrEventType;
+import cn.impler.wechat.mrgfnr.dto.MrgFnrEventType;
 
 /**
  * marriage and funeral event domain

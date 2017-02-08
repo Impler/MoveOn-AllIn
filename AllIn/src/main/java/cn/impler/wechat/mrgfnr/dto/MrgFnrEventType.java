@@ -1,4 +1,4 @@
-package cn.impler.wechat.mrgfnr.dmo;
+package cn.impler.wechat.mrgfnr.dto;
 
 import cn.impler.framework.mybatis.dao.dto.IGenericEnum;
 
