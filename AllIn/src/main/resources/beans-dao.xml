@@ -35,7 +35,7 @@
 		</property>
 		<property name="genericEnumClassNames">
 			<array>
-				<value>cn.impler.wechat.mrgfnr.dmo.MrgFnrEventType</value>
+				<value>cn.impler.wechat.mrgfnr.dto.MrgFnrEventType</value>
 			</array>
 		</property>
 	</bean>
