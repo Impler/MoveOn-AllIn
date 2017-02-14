@@ -1,29 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.impler.auth.dao.UserDao">
+
+	<resultMap id="user" type="User">
+		<id column="ID" property="id"/>
+		<result column="USERNAME" property="username"/>
+		<result column="PASSWORD" property="password"/>
+		<result column="NICKNAME" property="nickname"/>
+		<result column="SALT" property="salt"/>
+		<result column="EMAIL_ADDRESS" property="emailAddress"/>
+		<result column="MOBILE_NUMBER" property="mobileNum"/>
+	</resultMap>
 	
+	<!-- user security field -->
 	<sql id="securityInfoSql">
-		
+		USERNAME, PASSWORD, SALT 
 	</sql>
-	<select id="querySecurityInfoByUserName" parameterType="string" resultType="User">
-		select 
+	
+	<select id="querySecurityInfoByUserName" parameterType="string" resultType="user">
+		SELECT 
 		<include refid="securityInfoSql" />
-		from t_auth_user
-		where username = #{username}
+		FROM T_AUTH_USER
+		WHERE USERNAME = #{username}
 	</select>
 	
-	<select id="querySecurityInfoByMobileNum" parameterType="string" resultType="User">
-		select 
+	<select id="querySecurityInfoByMobileNum" parameterType="string" resultType="user">
+		SELECT 
 		<include refid="securityInfoSql" />
-		from t_auth_user
-		where username = #{username}
+		FROM T_AUTH_USER
+		WHERE MOBILE_NUMBER = #{mobileNum}
 	</select>
 	
-	<select id="querySecurityInfoByEmailAddress" parameterType="string" resultType="User">
-		select 
+	<select id="querySecurityInfoByEmailAddress" parameterType="string" resultType="user">
+		SELECT 
 		<include refid="securityInfoSql" />
-		from t_auth_user
-		where username = #{username}
+		FROM T_AUTH_USER
+		WHERE EMAIL_ADDRESS = #{emailAddress}
 	</select>
+	
+	<insert id="insert" parameterType="User">
+		INSERT INTO T_AUTH_USER (USERNAME, PASSWORD, SALT, NICKNAME, EMAIL_ADDRESS, MOBILE_NUMBER)
+		VALUES(#{username}, #{password}, #{salt}, #{nickname}, #{emailAddress}, #{mobileNum})
+	</insert>
 	
 </mapper>

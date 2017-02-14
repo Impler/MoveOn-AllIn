@@ -1,6 +1,6 @@
 package cn.impler.auth.domain;
 
-public class User extends BaseDomain{
+public class User extends BaseDomain {
 
 	// username
 	private String username;
@@ -10,6 +10,10 @@ public class User extends BaseDomain{
 	private String password;
 	// password salt
 	private String salt;
+	// mobile number
+	private String mobielNum;
+	// email address
+	private String emailAddress;
 
 	public String getUsername() {
 		return username;
@@ -41,6 +45,22 @@ public class User extends BaseDomain{
 
 	public void setSalt(String salt) {
 		this.salt = salt;
+	}
+
+	public String getMobielNum() {
+		return mobielNum;
+	}
+
+	public void setMobielNum(String mobielNum) {
+		this.mobielNum = mobielNum;
+	}
+
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
 	}
 
 }
