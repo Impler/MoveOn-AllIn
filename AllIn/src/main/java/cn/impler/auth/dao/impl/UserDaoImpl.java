@@ -17,4 +17,22 @@ public class UserDaoImpl extends
 		AbsAuthDao<UserDao, User, Integer, UserSearchBean> implements
 		UserDao {
 
+	@Override
+	public User querySecurityInfoByUserName(String userName) {
+		
+		return super.getDao().querySecurityInfoByUserName(userName);
+	}
+
+	@Override
+	public User querySecurityInfoByMobileNum(String mobileNumStr) {
+		
+		return super.getDao().querySecurityInfoByMobileNum(mobileNumStr);
+	}
+
+	@Override
+	public User querySecurityInfoByEmailAddress(String emailAddress) {
+	
+		return super.getDao().querySecurityInfoByEmailAddress(emailAddress);
+	}
+
 }

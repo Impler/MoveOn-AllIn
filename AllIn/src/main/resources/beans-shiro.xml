@@ -13,13 +13,25 @@
 		http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-		<property name="securityManager" ref="securityManager" />
-		<!-- other properties as necessary ... -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean"
+		p:securityManager-ref="securityManager" 
+		p:loginUrl="/auth/login.jsp">
+		<property name="filterChainDefinitions">
+			<value>
+				/** = authc, perms
+			</value>
+		</property>
 	</bean>
 
-    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-    	<property name="realm" ref=""></property>
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager"
+    	p:realm-ref="allInRealm">
     </bean>
     
+    <bean id="allInRealm" class="cn.impler.auth.shiro.realm.AllInRealm">
+    	<property name="credentialsMatcher">
+    		<bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+    			<property name="hashAlgorithmName" value="md5" />
+    		</bean>
+    	</property>
+    </bean>
 </beans>

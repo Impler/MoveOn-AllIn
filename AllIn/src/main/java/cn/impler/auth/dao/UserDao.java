@@ -10,4 +10,25 @@ import cn.impler.auth.domain.dto.UserSearchBean;
  */
 public interface UserDao extends AuthDao<User, Integer, UserSearchBean> {
 
+	/**
+	 * query user security information by username
+	 * @param userName
+	 * @return
+	 */
+	User querySecurityInfoByUserName(String userName);
+
+	/**
+	 * query user security information by mobile number
+	 * @param mobileNumStr
+	 * @return
+	 */
+	User querySecurityInfoByMobileNum(String mobileNumStr);
+
+	/**
+	 * query user security information by email address
+	 * @param emailAddress
+	 * @return
+	 */
+	User querySecurityInfoByEmailAddress(String emailAddress);
+
 }

@@ -11,4 +11,11 @@ import cn.impler.auth.domain.dto.UserSearchBean;
 public interface UserService 
 		extends AuthService<User, Integer, UserSearchBean>{
 
+	/**
+	 * query user security information by username(mobile/email address)
+	 * @param userName
+	 * @return
+	 */
+	User querySecurityInfoByUsername(String userName);
+
 }

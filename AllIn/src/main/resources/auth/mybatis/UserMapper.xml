@@ -2,4 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.impler.auth.dao.UserDao">
 	
+	<sql id="securityInfoSql">
+		
+	</sql>
+	<select id="querySecurityInfoByUserName" parameterType="string" resultType="User">
+		select 
+		<include refid="securityInfoSql" />
+		from t_auth_user
+		where username = #{username}
+	</select>
+	
+	<select id="querySecurityInfoByMobileNum" parameterType="string" resultType="User">
+		select 
+		<include refid="securityInfoSql" />
+		from t_auth_user
+		where username = #{username}
+	</select>
+	
+	<select id="querySecurityInfoByEmailAddress" parameterType="string" resultType="User">
+		select 
+		<include refid="securityInfoSql" />
+		from t_auth_user
+		where username = #{username}
+	</select>
+	
 </mapper>
