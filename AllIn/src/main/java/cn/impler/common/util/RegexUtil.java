@@ -1,6 +1,5 @@
 package cn.impler.common.util;
 
-import java.util.UUID;
 import java.util.regex.Pattern;
 
 public class RegexUtil {

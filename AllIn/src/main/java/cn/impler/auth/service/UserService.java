@@ -1,5 +1,8 @@
 package cn.impler.auth.service;
 
+import java.util.List;
+
+import cn.impler.auth.domain.Permission;
 import cn.impler.auth.domain.User;
 import cn.impler.auth.domain.dto.UserSearchBean;
 
@@ -13,9 +16,23 @@ public interface UserService
 
 	/**
 	 * query user security information by username(mobile/email address)
-	 * @param userName
+	 * @param username
 	 * @return
 	 */
-	User querySecurityInfoByUsername(String userName);
+	User querySecurityInfoByUsername(String username);
+
+	/**
+	 * query user common information by username(mobile/email address)
+	 * @param username
+	 * @return
+	 */
+	User queryCommonInfoByUsername(String username);
+
+	/**
+	 * query user permissions
+	 * @param user
+	 * @return
+	 */
+	List<Permission> queryUserPermissions(User user);
 
 }

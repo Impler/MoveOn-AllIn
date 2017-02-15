@@ -1,5 +1,7 @@
 package cn.impler.auth.shiro.realm;
 
+import java.util.List;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -11,6 +13,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import cn.impler.auth.domain.Permission;
 import cn.impler.auth.domain.User;
 import cn.impler.auth.service.UserService;
 
@@ -20,8 +23,12 @@ public class AllInRealm extends AuthorizingRealm{
 	private UserService userService;
 	
 	@Override
-	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg0) {
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection collection) {
 		
+		String username = (String) collection.getPrimaryPrincipal();
+		User user = userService.queryCommonInfoByUsername(username);
+		List<Permission> perms = userService.queryUserPermissions(user);
+		//TODO
 		return null;
 	}
 

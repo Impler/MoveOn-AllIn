@@ -18,9 +18,9 @@ public class UserDaoImpl extends
 		UserDao {
 
 	@Override
-	public User querySecurityInfoByUserName(String userName) {
+	public User querySecurityInfoByUsername(String username) {
 		
-		return super.getDao().querySecurityInfoByUserName(userName);
+		return super.getDao().querySecurityInfoByUsername(username);
 	}
 
 	@Override
@@ -33,6 +33,24 @@ public class UserDaoImpl extends
 	public User querySecurityInfoByEmailAddress(String emailAddress) {
 	
 		return super.getDao().querySecurityInfoByEmailAddress(emailAddress);
+	}
+
+	@Override
+	public User queryCommonInfoByUsername(String username) {
+		
+		return super.getDao().queryCommonInfoByUsername(username);
+	}
+
+	@Override
+	public User queryCommonInfoByMobileNum(String mobileNum) {
+
+		return super.getDao().queryCommonInfoByMobileNum(mobileNum);
+	}
+
+	@Override
+	public User queryCommonInfoByEmailAddress(String emailAddress) {
+
+		return super.getDao().queryCommonInfoByEmailAddress(emailAddress);
 	}
 
 }

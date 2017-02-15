@@ -12,12 +12,12 @@
 		<result column="MOBILE_NUMBER" property="mobileNum"/>
 	</resultMap>
 	
+	<!-- query user security information s -->
 	<!-- user security field -->
 	<sql id="securityInfoSql">
 		USERNAME, PASSWORD, SALT 
 	</sql>
-	
-	<select id="querySecurityInfoByUserName" parameterType="string" resultType="user">
+	<select id="querySecurityInfoByUsername" parameterType="string" resultType="user">
 		SELECT 
 		<include refid="securityInfoSql" />
 		FROM T_AUTH_USER
@@ -37,6 +37,34 @@
 		FROM T_AUTH_USER
 		WHERE EMAIL_ADDRESS = #{emailAddress}
 	</select>
+	<!-- query user security information e -->
+	
+	<!-- query user common information s -->
+	<!-- user common field -->
+	<sql id="commonInfoSql">
+		ID, USERNAME, EMAIL_ADDRESS, MOBILE_NUMBER
+	</sql>
+	<select id="queryCommonInfoByUsername" parameterType="string" resultType="user">
+		SELECT 
+		<include refid="commonInfoSql" />
+		FROM T_AUTH_USER
+		WHERE USERNAME = #{username}
+	</select>
+	
+	<select id="queryCommonInfoByMobileNum" parameterType="string" resultType="user">
+		SELECT 
+		<include refid="commonInfoSql" />
+		FROM T_AUTH_USER
+		WHERE MOBILE_NUMBER = #{mobileNum}
+	</select>
+	
+	<select id="queryCommonInfoByEmailAddress" parameterType="string" resultType="user">
+		SELECT 
+		<include refid="commonInfoSql" />
+		FROM T_AUTH_USER
+		WHERE EMAIL_ADDRESS = #{emailAddress}
+	</select>
+	<!-- query user common information e -->
 	
 	<insert id="insert" parameterType="User">
 		INSERT INTO T_AUTH_USER (USERNAME, PASSWORD, SALT, NICKNAME, EMAIL_ADDRESS, MOBILE_NUMBER)

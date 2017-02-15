@@ -1,12 +1,15 @@
 package cn.impler.auth.service.impl;
 
+import java.util.List;
+
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.impler.auth.dao.AuthDao;
+import cn.impler.auth.dao.PermissionDao;
 import cn.impler.auth.dao.UserDao;
+import cn.impler.auth.domain.Permission;
 import cn.impler.auth.domain.User;
 import cn.impler.auth.domain.dto.UserSearchBean;
 import cn.impler.auth.service.AbsAuthService;
@@ -26,20 +29,23 @@ public class UserServiceImpl
 	@Autowired
 	private UserDao userDao;
 
+	@Autowired
+	private PermissionDao permissionDao;
+	
 	@Override
 	protected AuthDao<User, Integer, UserSearchBean> getAuthDao() {
 		return userDao;
 	}
 
 	@Override
-	public User querySecurityInfoByUsername(String userName) {
-		User user = userDao.querySecurityInfoByUserName(userName);
+	public User querySecurityInfoByUsername(String username) {
+		User user = userDao.querySecurityInfoByUsername(username);
 		
-		if(null == user && RegexUtil.isMobileNumStr(userName)){
-			user = userDao.querySecurityInfoByMobileNum(userName);
+		if(null == user && RegexUtil.isMobileNumStr(username)){
+			user = userDao.querySecurityInfoByMobileNum(username);
 		}
-		if(null == user && RegexUtil.isEmailAddressStr(userName)){
-			user = userDao.querySecurityInfoByEmailAddress(userName);
+		if(null == user && RegexUtil.isEmailAddressStr(username)){
+			user = userDao.querySecurityInfoByEmailAddress(username);
 		}
 		
 		if(null == user){
@@ -48,9 +54,28 @@ public class UserServiceImpl
 		
 		return user;
 	}
-	public static void main(String[] args) {
-		SimpleHash hash = new SimpleHash("md5", "123", "1");
-		System.out.println(hash);
+
+	@Override
+	public User queryCommonInfoByUsername(String username) {
+		User user = userDao.queryCommonInfoByUsername(username);
+		
+		if(null == user && RegexUtil.isMobileNumStr(username)){
+			user = userDao.queryCommonInfoByMobileNum(username);
+		}
+		if(null == user && RegexUtil.isEmailAddressStr(username)){
+			user = userDao.queryCommonInfoByEmailAddress(username);
+		}
+		
+		if(null == user){
+			throw new UnknownAccountException();
+		}
+		
+		return user;
+	}
+
+	@Override
+	public List<Permission> queryUserPermissions(User user) {
+		return null;
 	}
 
 

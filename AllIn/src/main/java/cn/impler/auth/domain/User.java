@@ -11,7 +11,7 @@ public class User extends BaseDomain {
 	// password salt
 	private String salt;
 	// mobile number
-	private String mobielNum;
+	private String mobileNum;
 	// email address
 	private String emailAddress;
 
@@ -47,12 +47,12 @@ public class User extends BaseDomain {
 		this.salt = salt;
 	}
 
-	public String getMobielNum() {
-		return mobielNum;
+	public String getMobileNum() {
+		return mobileNum;
 	}
 
-	public void setMobielNum(String mobielNum) {
-		this.mobielNum = mobielNum;
+	public void setMobileNum(String mobileNum) {
+		this.mobileNum = mobileNum;
 	}
 
 	public String getEmailAddress() {

@@ -12,10 +12,10 @@ public interface UserDao extends AuthDao<User, Integer, UserSearchBean> {
 
 	/**
 	 * query user security information by username
-	 * @param userName
+	 * @param username
 	 * @return
 	 */
-	User querySecurityInfoByUserName(String userName);
+	User querySecurityInfoByUsername(String username);
 
 	/**
 	 * query user security information by mobile number
@@ -30,5 +30,26 @@ public interface UserDao extends AuthDao<User, Integer, UserSearchBean> {
 	 * @return
 	 */
 	User querySecurityInfoByEmailAddress(String emailAddress);
+
+	/**
+	 * query user common information by username
+	 * @param username
+	 * @return
+	 */
+	User queryCommonInfoByUsername(String username);
+
+	/**
+	 * query user common information by mobile number
+	 * @param mobileNum
+	 * @return
+	 */
+	User queryCommonInfoByMobileNum(String mobileNum);
+
+	/**
+	 * query user common information by email address
+	 * @param emailAddress
+	 * @return
+	 */
+	User queryCommonInfoByEmailAddress(String emailAddress);
 
 }
