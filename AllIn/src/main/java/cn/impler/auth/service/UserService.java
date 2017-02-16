@@ -2,7 +2,6 @@ package cn.impler.auth.service;
 
 import java.util.List;
 
-import cn.impler.auth.domain.Permission;
 import cn.impler.auth.domain.User;
 import cn.impler.auth.domain.dto.UserSearchBean;
 
@@ -27,12 +26,12 @@ public interface UserService
 	 * @return
 	 */
 	User queryCommonInfoByUsername(String username);
-
+	
 	/**
-	 * query user permissions
-	 * @param user
+	 * query user referenced role ids by user id
+	 * @param userId
 	 * @return
 	 */
-	List<Permission> queryUserPermissions(User user);
+	List<Integer> queryRefedRoleIds(int userId);
 
 }

@@ -13,7 +13,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cn.impler.auth.domain.Permission;
 import cn.impler.auth.domain.User;
 import cn.impler.auth.service.UserService;
 
@@ -27,7 +26,7 @@ public class AllInRealm extends AuthorizingRealm{
 		
 		String username = (String) collection.getPrimaryPrincipal();
 		User user = userService.queryCommonInfoByUsername(username);
-		List<Permission> perms = userService.queryUserPermissions(user);
+		List<Integer> roleIds = userService.queryRefedRoleIds(user.getId());
 		//TODO
 		return null;
 	}

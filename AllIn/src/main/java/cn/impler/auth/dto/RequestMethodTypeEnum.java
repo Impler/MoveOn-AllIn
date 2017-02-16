@@ -4,7 +4,7 @@ package cn.impler.auth.dto;
  * @author impler
  * @date 2017-01-18
  */
-public enum RequestMethodType {
+public enum RequestMethodTypeEnum {
 
 	//unlimited
 	ALL, 

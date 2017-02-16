@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.impler.auth.domain.dto.FooKey;
-import cn.impler.auth.dto.OperateType;
+import cn.impler.auth.dto.OperateTypeEnum;
 import cn.impler.auth.service.AuthService;
 import cn.impler.common.dto.Result;
 import cn.impler.framework.mybatis.dao.dto.Pagination;
@@ -38,14 +38,14 @@ public abstract class AbsAuthController<E, K, S> {
 	 */
 	public abstract AuthService<E, K, S> getAuthService();
 	
-	protected Map<OperateType, String> resultMappings = getResultMappings();
+	protected Map<OperateTypeEnum, String> resultMappings = getResultMappings();
 	
-	protected Map<OperateType, String> getResultMappings(){
-		Map<OperateType, String> resultMapping = new HashMap<OperateType, String>();
-		resultMapping.put(OperateType.ADD, "add");
-		resultMapping.put(OperateType.DELETE, "delete");
-		resultMapping.put(OperateType.UPDATE, "update");
-		resultMapping.put(OperateType.QUERY, "query");
+	protected Map<OperateTypeEnum, String> getResultMappings(){
+		Map<OperateTypeEnum, String> resultMapping = new HashMap<OperateTypeEnum, String>();
+		resultMapping.put(OperateTypeEnum.ADD, "add");
+		resultMapping.put(OperateTypeEnum.DELETE, "delete");
+		resultMapping.put(OperateTypeEnum.UPDATE, "update");
+		resultMapping.put(OperateTypeEnum.QUERY, "query");
 		return resultMapping;
 	}
 	

@@ -5,7 +5,7 @@ package cn.impler.auth.dto;
  * @author impler
  * @date 2017-01-11
  */
-public enum OperateType {
+public enum OperateTypeEnum {
 	// insert operation
 	ADD, 
 	// delete operation
