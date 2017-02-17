@@ -68,3 +68,13 @@ CREATE TABLE `t_wechat_mrgfnr` (
   `last_update_time` datetime DEFAULT NULL COMMENT 'last update time',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `t_auth_resource_ref`;
+CREATE TABLE `t_auth_resource_ref` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `type` int(11) DEFAULT NULL COMMENT 'reference type',
+  `left_value` int(11) DEFAULT NULL COMMENT 'key',
+  `right_value` int(11) DEFAULT NULL COMMENT 'reference value',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
