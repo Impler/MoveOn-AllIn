@@ -37,12 +37,11 @@ public class AllInRealm extends AuthorizingRealm{
 		
 		UsernamePasswordToken upToken = (UsernamePasswordToken) token;
 		String userName = upToken.getUsername().trim();
+		// query user security info: hashed password, salt value by username
 		User user = userService.querySecurityInfoByUsername(userName);
 		
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userName,
-				user.getPassword(), super.getName());
-		
-		info.setCredentialsSalt(ByteSource.Util.bytes(user.getSalt().getBytes()));
+				user.getPassword(), ByteSource.Util.bytes(user.getSalt().getBytes()), super.getName());
 		
 		return info;
 	}
