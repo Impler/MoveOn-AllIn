@@ -2,4 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.impler.auth.dao.PermissionDao">
 	
+	<select id="">
+		SELECT
+			r.id
+		FROM
+			t_auth_resource r
+		WHERE
+			r.url = #{url}
+		AND r.id IN (
+			-- user referenced resource ids
+			SELECT DISTINCT
+				right_value
+			FROM
+				t_auth_resource_ref f
+			WHERE
+				f.type = 3
+			AND f.left_value IN (
+			-- user referenced role ids
+				SELECT
+					right_value
+				FROM
+					t_auth_resource_ref
+				WHERE
+					type = 2
+				AND left_value = #{userId}
+			)
+		)
+	</select>
 </mapper>

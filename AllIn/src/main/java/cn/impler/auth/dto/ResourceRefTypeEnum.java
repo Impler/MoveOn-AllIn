@@ -5,8 +5,7 @@ import cn.impler.framework.mybatis.dao.dto.IGenericEnum;
 public enum ResourceRefTypeEnum implements IGenericEnum {
 
 	USERROLE(1), 
-	ROLEMENU(2),
-	MENUURL(3);
+	ROLERESOURCE(2);
 	
 	// key
 	private int id;
