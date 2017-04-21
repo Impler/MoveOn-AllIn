@@ -74,12 +74,5 @@ public class UserServiceImpl extends
 		return user;
 	}
 
-	@Override
-	public List<Integer> queryRefedRoleIds(int userId) {
-		ResourceRef ref = new ResourceRef();
-		ref.setLeftVal(userId);
-		ref.setType(ResourceRefTypeEnum.USERROLE);
-		return resourceRefDao.queryLeftValueRefedValues(ref);
-	}
 
 }

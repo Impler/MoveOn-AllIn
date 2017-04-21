@@ -2,30 +2,69 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.impler.auth.dao.PermissionDao">
 	
-	<select id="">
+	<resultMap id="resource" type="Resource">
+		<id column="id" property="id"/>
+		<result column="" property=""/>
+		<result column="" property=""/>
+		<result column="" property=""/>
+		<result column="" property=""/>
+		<result column="" property=""/>
+		<result column="" property=""/>
+		<result column="" property=""/>
+		<result column="" property=""/>
+		<result column="" property=""/>
+		<result column="" property=""/>
+	</resultMap>
+	
+	<select id="queryResourceIdByLiteralUrl" resultType="Integer">
 		SELECT
-			r.id
+			id
 		FROM
-			t_auth_resource r
+			t_auth_resource
 		WHERE
-			r.url = #{url}
-		AND r.id IN (
-			-- user referenced resource ids
+			url = #{url.url}
+		AND url_type = #{url.type.id}
+		AND id IN (
 			SELECT DISTINCT
-				right_value
+				right_value AS resId
 			FROM
-				t_auth_resource_ref f
+				t_auth_resource_ref
 			WHERE
-				f.type = 3
-			AND f.left_value IN (
-			-- user referenced role ids
+				type = 2
+			AND left_value IN (
 				SELECT
-					right_value
+					right_value AS roleId
+				FROM
+					t_auth_resource_ref
+				WHERE
+					type = 1
+				AND left_value = #{user.id}
+			)
+		)
+	</select>
+	
+	<select id="queryUserAntResources" resultMap="resource">
+		SELECT
+			id, name, description, type, level, url, url_type, seq
+		FROM
+			t_auth_resource
+		WHERE
+			type = 2
+		AND id IN (
+			SELECT DISTINCT
+				right_value AS resId
+			FROM
+				t_auth_resource_ref
+			WHERE
+				type = 3
+			AND left_value IN (
+				SELECT
+					right_value AS roleId
 				FROM
 					t_auth_resource_ref
 				WHERE
 					type = 2
-				AND left_value = #{userId}
+				AND left_value = #{user.id}
 			)
 		)
 	</select>

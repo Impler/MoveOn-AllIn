@@ -31,23 +31,23 @@ public class DynamicPermissionsAuthorizationFilter extends HttpMethodPermissionF
         	return true;
         }
         
-        checkRequestUrlValid((HttpServletRequest) request);
+        Integer resId = checkRequestUrlValid((HttpServletRequest) request);
+        // no resource matched, return false
+        if(null == resId){
+        	return false;
+        }
         
-        // add current request uri into those permissions that waiting for verification
-        String[] dynamicPerms = (String[]) ArrayUtils.add(perms, requestURI);
+        // add current request resource into those permissions that waiting for verification
+        String[] dynamicPerms = (String[]) ArrayUtils.add(perms, resId);
         
-        // 根据用户名查询分配的权限
-        // 遍历权限，动态url 还是
-        // 如果没有，遍历动态参数
         return super.isAccessAllowed(request, response, dynamicPerms);
 	}
 	
 	
-	private void checkRequestUrlValid(HttpServletRequest request){
-		
+	private Integer checkRequestUrlValid(HttpServletRequest request){
 		String requestURI = super.getPathWithinApplication(request);
 		Subject subject = SecurityUtils.getSubject();
 		User user = (User) subject.getSession().getAttribute(Constants.KEY_USER_IN_SESSION);
-		Integer resourceId = resService.queryUserResourceIdByUrl(user, requestURI);
+		return resService.queryUserResourceIdByUrl(user, requestURI);
 	}
 }

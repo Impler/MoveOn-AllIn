@@ -1,5 +1,6 @@
 package cn.impler.auth.domain;
 
+import cn.impler.auth.domain.dto.Url;
 import cn.impler.auth.dto.ResourceTypeEnum;
 import cn.impler.auth.dto.RequestMethodTypeEnum;
 
@@ -9,10 +10,10 @@ public class Resource extends BaseDomain {
 	private String name;
 	// resource description
 	private String description;
-	// resource url
-	private String url;
 	// resource type
 	private ResourceTypeEnum type;
+	// resource url
+	private Url url;
 	// resource level
 	private String level;
 	// resource order
@@ -36,11 +37,11 @@ public class Resource extends BaseDomain {
 		this.description = description;
 	}
 
-	public String getUrl() {
+	public Url getUrl() {
 		return url;
 	}
 
-	public void setUrl(String url) {
+	public void setUrl(Url url) {
 		this.url = url;
 	}
 

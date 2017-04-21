@@ -8,12 +8,5 @@ public interface ResourceRefDao extends
 		AuthDao<ResourceRef, Integer, ResourceRef> {
 
 
-	/**
-	 * query left value referenced ids
-	 * @param ref
-	 * @return
-	 */
-	List<Integer> queryLeftValueRefedValues(ResourceRef ref);
-
 	
 }

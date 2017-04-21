@@ -1,15 +1,11 @@
 package cn.impler.auth.shiro.realm;
 
-import java.util.List;
-
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.Permission;
-import org.apache.shiro.authz.permission.WildcardPermission;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -28,7 +24,7 @@ public class AllInRealm extends AuthorizingRealm{
 		
 		String username = (String) collection.getPrimaryPrincipal();
 		User user = userService.queryCommonInfoByUsername(username);
-		List<Integer> roleIds = userService.queryRefedRoleIds(user.getId());
+//		List<Integer> roleIds = userService.queryRefedRoleIds(user.getId());
 		//TODO
 		return null;
 	}

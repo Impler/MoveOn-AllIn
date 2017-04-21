@@ -27,11 +27,4 @@ public interface UserService
 	 */
 	User queryCommonInfoByUsername(String username);
 	
-	/**
-	 * query user referenced role ids by user id
-	 * @param userId
-	 * @return
-	 */
-	List<Integer> queryRefedRoleIds(int userId);
-
 }

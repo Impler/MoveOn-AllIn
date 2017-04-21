@@ -2,28 +2,28 @@ package cn.impler.auth.domain;
 
 import cn.impler.auth.dto.ResourceRefTypeEnum;
 
-public class ResourceRef extends BaseDomain {
+public class ResourceRef<L extends BaseDomain, R extends BaseDomain> extends BaseDomain {
 
 	// key
-	private int leftVal;
+	private L leftVal;
 	// references
-	private int rightVal;
+	private R rightVal;
 	// type
 	private ResourceRefTypeEnum type;
 
-	public int getLeftVal() {
+	public L getLeftVal() {
 		return leftVal;
 	}
 
-	public void setLeftVal(int leftVal) {
+	public void setLeftVal(L leftVal) {
 		this.leftVal = leftVal;
 	}
 
-	public int getRightVal() {
+	public R getRightVal() {
 		return rightVal;
 	}
 
-	public void setRightVal(int rightVal) {
+	public void setRightVal(R rightVal) {
 		this.rightVal = rightVal;
 	}
 
@@ -34,4 +34,5 @@ public class ResourceRef extends BaseDomain {
 	public void setType(ResourceRefTypeEnum type) {
 		this.type = type;
 	}
+
 }
