@@ -10,47 +10,64 @@ Target Server Type    : MYSQL
 Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2017-01-22 11:11:57
+Date: 2017-04-21 17:49:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for t_auth_permission
+-- Table structure for t_auth_resource
 -- ----------------------------
-DROP TABLE IF EXISTS `t_auth_permission`;
-CREATE TABLE `t_auth_permission` (
-  `id` int(11) NOT NULL COMMENT 'permission id',
-  `name` varchar(50) DEFAULT NULL COMMENT 'permission name',
-  `level` int(11) DEFAULT NULL COMMENT 'permission level',
-  `path` varchar(50) DEFAULT NULL COMMENT 'permission path',
-  `type` varchar(10) DEFAULT NULL COMMENT 'request method（get/post/delete/put）',
+DROP TABLE IF EXISTS `t_auth_resource`;
+CREATE TABLE `t_auth_resource` (
+  `id` int(11) NOT NULL COMMENT '资源编号',
+  `name` varchar(30) DEFAULT NULL COMMENT '资源名称',
+  `description` varchar(50) DEFAULT NULL COMMENT '资源描述',
+  `type` int(10) DEFAULT NULL COMMENT '资源类型',
+  `level` int(11) DEFAULT NULL COMMENT '资源级别',
+  `url` varchar(50) DEFAULT NULL COMMENT '资源路径',
+  `url_type` int(11) DEFAULT NULL COMMENT 'url类型：1 字面值Url，2 Ant Url',
+  `seq` int(11) DEFAULT '0' COMMENT '顺序',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for t_auth_resource_ref
+-- ----------------------------
+DROP TABLE IF EXISTS `t_auth_resource_ref`;
+CREATE TABLE `t_auth_resource_ref` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `type` int(11) DEFAULT NULL COMMENT '关联类型',
+  `left_value` int(11) DEFAULT NULL COMMENT '左值',
+  `right_value` int(11) DEFAULT NULL COMMENT '右值',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for t_auth_role
 -- ----------------------------
 DROP TABLE IF EXISTS `t_auth_role`;
 CREATE TABLE `t_auth_role` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'role id',
-  `name` varchar(30) DEFAULT NULL COMMENT 'role name',
-  `description` varchar(64) DEFAULT NULL COMMENT 'role description',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '角色编号',
+  `name` varchar(30) DEFAULT NULL COMMENT '角色名称',
+  `description` varchar(64) DEFAULT NULL COMMENT '角色描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for t_auth_user
 -- ----------------------------
 DROP TABLE IF EXISTS `t_auth_user`;
 CREATE TABLE `t_auth_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'user id',
-  `username` varchar(32) DEFAULT NULL COMMENT 'username',
-  `nickname` varchar(50) DEFAULT NULL COMMENT 'useralt nick name',
-  `password` varchar(64) DEFAULT NULL COMMENT 'user password',
-  `salt` varchar(64) DEFAULT NULL COMMENT 'user password salt',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户编号',
+  `username` varchar(32) DEFAULT NULL COMMENT '用户名',
+  `nickname` varchar(50) DEFAULT NULL COMMENT '用户昵称',
+  `password` varchar(64) DEFAULT NULL COMMENT '用户密码',
+  `salt` varchar(64) DEFAULT NULL COMMENT '密码盐值',
+  `email_address` varchar(30) DEFAULT NULL,
+  `mobile_number` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for t_wechat_mrgfnr
@@ -67,14 +84,4 @@ CREATE TABLE `t_wechat_mrgfnr` (
   `create_time` datetime DEFAULT NULL COMMENT 'create time',
   `last_update_time` datetime DEFAULT NULL COMMENT 'last update time',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `t_auth_resource_ref`;
-CREATE TABLE `t_auth_resource_ref` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `type` int(11) DEFAULT NULL COMMENT 'reference type',
-  `left_value` int(11) DEFAULT NULL COMMENT 'key',
-  `right_value` int(11) DEFAULT NULL COMMENT 'reference value',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
