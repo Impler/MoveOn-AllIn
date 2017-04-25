@@ -7,14 +7,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cn.impler.auth.common.Constants;
 import cn.impler.auth.domain.User;
 import cn.impler.auth.service.ResourceService;
+import cn.impler.auth.util.SecurityUtil;
 
 public class DynamicPermissionsAuthorizationFilter extends HttpMethodPermissionFilter {
 
@@ -24,6 +22,11 @@ public class DynamicPermissionsAuthorizationFilter extends HttpMethodPermissionF
 	@Override
 	public boolean isAccessAllowed(ServletRequest request,
 			ServletResponse response, Object mappedValue) throws IOException {
+		User user = (User) SecurityUtil.currentUser();
+		
+		if(user.isAdmin()){
+			return true;
+		}
 		
         String[] perms = (String[]) mappedValue;
         
@@ -46,8 +49,7 @@ public class DynamicPermissionsAuthorizationFilter extends HttpMethodPermissionF
 	
 	private Integer checkRequestUrlValid(HttpServletRequest request){
 		String requestURI = super.getPathWithinApplication(request);
-		Subject subject = SecurityUtils.getSubject();
-		User user = (User) subject.getSession().getAttribute(Constants.KEY_USER_IN_SESSION);
+		User user = (User) SecurityUtil.currentUser();
 		return resService.queryUserResourceIdByUrl(user, requestURI);
 	}
 }

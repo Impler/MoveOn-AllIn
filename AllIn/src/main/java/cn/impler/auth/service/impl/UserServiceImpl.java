@@ -1,18 +1,13 @@
 package cn.impler.auth.service.impl;
 
-import java.util.List;
-
 import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.impler.auth.dao.AuthDao;
-import cn.impler.auth.dao.ResourceRefDao;
 import cn.impler.auth.dao.UserDao;
-import cn.impler.auth.domain.ResourceRef;
 import cn.impler.auth.domain.User;
 import cn.impler.auth.domain.dto.UserSearchBean;
-import cn.impler.auth.dto.ResourceRefTypeEnum;
 import cn.impler.auth.service.AbsAuthService;
 import cn.impler.auth.service.UserService;
 import cn.impler.common.util.RegexUtil;
@@ -29,9 +24,6 @@ public class UserServiceImpl extends
 
 	@Autowired
 	private UserDao userDao;
-
-	@Autowired
-	private ResourceRefDao resourceRefDao;
 
 	@Override
 	protected AuthDao<User, Integer, UserSearchBean> getAuthDao() {

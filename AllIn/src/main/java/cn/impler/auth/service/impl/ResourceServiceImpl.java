@@ -10,7 +10,6 @@ import cn.impler.auth.dao.ResourceDao;
 import cn.impler.auth.domain.Resource;
 import cn.impler.auth.domain.User;
 import cn.impler.auth.domain.dto.ResourceSearchBean;
-import cn.impler.auth.domain.dto.Url;
 import cn.impler.auth.dto.ResourceUrlTypeEnum;
 import cn.impler.auth.service.AbsAuthService;
 import cn.impler.auth.service.ResourceService;
@@ -30,48 +29,25 @@ public class ResourceServiceImpl extends
 
 	@Override
 	public Integer queryUserResourceIdByUrl(User user, String requestURI) {
-		// query resource by literal url string
-		Integer resId = getLiteralUrlId(user, requestURI);
-		if (null != resId) {
-			return resId;
-		} 
-		// if not exists, check whether matches Ant urls 
-		else {
-			return getAntUrlId(user, requestURI);
+		
+		List<Resource> resources = this.resDao.queryUserResources(user);
+
+		if (null == resources || resources.isEmpty()) {
+			return null;
 		}
-	}
 
-	/**
-	 * query resource by literal url string
-	 * @param user
-	 * @param requestURI
-	 * @return
-	 */
-	private Integer getLiteralUrlId(User user, String requestURI) {
-
-		Url url = new Url(requestURI, ResourceUrlTypeEnum.LITERAL);
-
-		return this.resDao.queryUserResourceIdByLiteralUrl(user, url);
-	}
-
-	/**
-	 * query resource by Ant url
-	 * @param user
-	 * @param requestURI
-	 * @return
-	 */
-	private Integer getAntUrlId(User user, String requestURI) {
-		
-		// 缓存
-		List<Resource> resources = this.resDao.queryUserAntResources(user);
-		
-		if(null != resources){
-			for(Resource r : resources){
-				if(r.getUrl().match(requestURI)){
+		for (Resource r : resources) {
+			if (ResourceUrlTypeEnum.LITERAL.equals(r.getType())) {
+				if (requestURI.equals(r.getUrl())) {
+					return r.getId();
+				}
+			} else {
+				if (r.getUrl().match(requestURI)) {
 					return r.getId();
 				}
 			}
 		}
+
 		return null;
 	}
 

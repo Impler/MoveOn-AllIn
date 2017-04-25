@@ -14,7 +14,8 @@
 		p:loginUrl="/auth/login.jsp">
 		<property name="filters">
 			<util:map>
-				<entry key="perms" value-ref="dynamicPermissionsAuthorizationFilter"></entry>
+				<entry key="authc" value-ref="allInFormAuthenticationFilter" />
+				<entry key="perms" value-ref="dynamicPermissionsAuthorizationFilter" />
 			</util:map>
 		</property>
 		<property name="filterChainDefinitions">
@@ -24,8 +25,12 @@
 		</property>
 	</bean>
 
+	<bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager"
+		p:cacheManager-ref="ehcacheManager" />
+	
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager"
-    	p:realm-ref="allInRealm">
+    	p:realm-ref="allInRealm"
+    	p:cacheManager-ref="shiroCacheManager">
     </bean>
     
     <bean id="allInRealm" class="cn.impler.auth.shiro.realm.AllInRealm">
@@ -36,6 +41,7 @@
     	</property>
     </bean>
     
-    <bean id="dynamicPermissionsAuthorizationFilter" class="cn.impler.auth.shiro.filter.DynamicPermissionsAuthorizationFilter"></bean>
+    <bean id="dynamicPermissionsAuthorizationFilter" class="cn.impler.auth.shiro.filter.DynamicPermissionsAuthorizationFilter" />
+    <bean id="allInFormAuthenticationFilter" class="cn.impler.auth.shiro.filter.AllInFormAuthenticationFilter" />
     
 </beans>

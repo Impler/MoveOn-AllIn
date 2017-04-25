@@ -29,6 +29,13 @@ public interface ResourceDao extends AuthDao<Resource, Integer, ResourceSearchBe
 	 * @param user
 	 * @return
 	 */
-	List<Resource> queryUserAntResources(User user);
+	List<Resource> queryUserAntResources(@Param("user") User user);
+	
+	/**
+	 * query user referenced resources
+	 * @param user
+	 * @return
+	 */
+	List<Resource> queryUserResources(@Param("user") User user);
 
 }

@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.impler.auth.dao.PermissionDao">
+<mapper namespace="cn.impler.auth.dao.ResourceDao">
 	
 	<resultMap id="resource" type="Resource">
 		<id column="id" property="id"/>
-		<result column="" property=""/>
-		<result column="" property=""/>
-		<result column="" property=""/>
-		<result column="" property=""/>
-		<result column="" property=""/>
-		<result column="" property=""/>
-		<result column="" property=""/>
-		<result column="" property=""/>
-		<result column="" property=""/>
-		<result column="" property=""/>
+		<result column="name" property="name"/>
+		<result column="description" property="description"/>
+		<result column="type" property="type"/>
+		<result column="level" property="level"/>
+		<result column="url" property="url.url"/>
+		<result column="url_type" property="url.type"/>
+		<result column="seq" property="seq"/>
 	</resultMap>
-	
-	<select id="queryResourceIdByLiteralUrl" resultType="Integer">
+
+	<select id="queryUserResourceIdByLiteralUrl" resultType="Integer">
 		SELECT
 			id
 		FROM
@@ -64,6 +61,31 @@
 					t_auth_resource_ref
 				WHERE
 					type = 2
+				AND left_value = #{user.id}
+			)
+		)
+	</select>
+	
+	<select id="queryUserResources" resultMap="resource">
+		SELECT
+			id, name, description, type, level, url, url_type, seq
+		FROM
+			t_auth_resource
+		WHERE
+			id IN (
+			SELECT DISTINCT
+				right_value AS resId
+			FROM
+				t_auth_resource_ref
+			WHERE
+				type = 2
+			AND left_value IN (
+				SELECT
+					right_value AS roleId
+				FROM
+					t_auth_resource_ref
+				WHERE
+					type = 1
 				AND left_value = #{user.id}
 			)
 		)

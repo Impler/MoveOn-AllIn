@@ -1,8 +1,24 @@
 package cn.impler.auth.dto;
 
-public enum ResourceTypeEnum {
+import cn.impler.framework.mybatis.dao.dto.IGenericEnum;
+
+
+public enum ResourceTypeEnum implements IGenericEnum{
 	// menu resource
-	MENU, 
+	MENU(1), 
+	// link resource
+	LINK(2);
+
+	private int id;
 	
-	LINK
+	private ResourceTypeEnum(int id) {
+		this.id = id;
+	}
+
+	@Override
+	public int getId() {
+		return this.id;
+	}
+
+	
 }

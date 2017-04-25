@@ -1,5 +1,7 @@
 package cn.impler.auth.domain;
 
+import cn.impler.auth.dto.UserIdentityEnum;
+
 public class User extends BaseDomain {
 
 	// username
@@ -14,6 +16,8 @@ public class User extends BaseDomain {
 	private String mobileNum;
 	// email address
 	private String emailAddress;
+	// identity
+	private UserIdentityEnum identity;
 
 	public String getUsername() {
 		return username;
@@ -61,6 +65,18 @@ public class User extends BaseDomain {
 
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
+	}
+
+	public UserIdentityEnum getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity(UserIdentityEnum identity) {
+		this.identity = identity;
+	}
+	
+	public boolean isAdmin(){
+		return UserIdentityEnum.ADMIN.equals(this.identity);
 	}
 
 }

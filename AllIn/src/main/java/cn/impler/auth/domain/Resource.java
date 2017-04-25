@@ -16,8 +16,8 @@ public class Resource extends BaseDomain {
 	private Url url;
 	// resource level
 	private String level;
-	// resource order
-	private int order;
+	// resource seq
+	private int seq;
 	// resource request type
 	private RequestMethodTypeEnum method = RequestMethodTypeEnum.ALL;
 
@@ -69,12 +69,12 @@ public class Resource extends BaseDomain {
 		this.level = level;
 	}
 
-	public int getOrder() {
-		return order;
+	public int getSeq() {
+		return seq;
 	}
 
-	public void setOrder(int order) {
-		this.order = order;
+	public void setSeq(int seq) {
+		this.seq = seq;
 	}
 
 }
