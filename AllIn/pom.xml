@@ -85,6 +85,9 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>${version.hibernate-validator}</version>
 		</dependency>
+		
+		<!-- avoid conflict with tomcat build-in jars-->
+		<!-- 
 		<dependency>
 			<groupId>javax.el</groupId>
 			<artifactId>javax.el-api</artifactId>
@@ -95,6 +98,7 @@
 			<artifactId>javax.el</artifactId>
 			<version>${version.javax.el}</version>
 		</dependency>
+		-->
 		<!-- Spring validation dependencies e -->
 
 		<!-- Mybatis dependencies s -->

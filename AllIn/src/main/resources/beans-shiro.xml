@@ -14,7 +14,6 @@
 		p:loginUrl="/auth/login.jsp">
 		<property name="filters">
 			<util:map>
-				<entry key="authc" value-ref="allInFormAuthenticationFilter" />
 				<entry key="perms" value-ref="dynamicPermissionsAuthorizationFilter" />
 			</util:map>
 		</property>
@@ -25,15 +24,28 @@
 		</property>
 	</bean>
 
+	<!-- cache manager -->
+	<!-- reference beans-ehcache.xml ehcacheManager-->
 	<bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager"
 		p:cacheManager-ref="ehcacheManager" />
+
+	<bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
+		<!-- register authentication listener -->
+		<property name="authenticationListeners">
+			<array>
+				<bean class="cn.impler.auth.shiro.listener.AllInAuthenticationListener" />
+			</array>
+		</property>
+	</bean>
 	
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager"
     	p:realm-ref="allInRealm"
-    	p:cacheManager-ref="shiroCacheManager">
-    </bean>
+    	p:cacheManager-ref="shiroCacheManager"
+    	p:authenticator-ref="authenticator" />
     
-    <bean id="allInRealm" class="cn.impler.auth.shiro.realm.AllInRealm">
+    <bean id="allInRealm" class="cn.impler.auth.shiro.realm.AllInRealm"
+    	p:cacheManager-ref="shiroCacheManager"
+    	p:authenticationCachingEnabled="true">
     	<property name="credentialsMatcher">
     		<bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
     			<property name="hashAlgorithmName" value="md5" />
@@ -42,6 +54,5 @@
     </bean>
     
     <bean id="dynamicPermissionsAuthorizationFilter" class="cn.impler.auth.shiro.filter.DynamicPermissionsAuthorizationFilter" />
-    <bean id="allInFormAuthenticationFilter" class="cn.impler.auth.shiro.filter.AllInFormAuthenticationFilter" />
     
 </beans>

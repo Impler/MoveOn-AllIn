@@ -24,7 +24,7 @@ public class DynamicPermissionsAuthorizationFilter extends HttpMethodPermissionF
 			ServletResponse response, Object mappedValue) throws IOException {
 		User user = (User) SecurityUtil.currentUser();
 		
-		if(user.isAdmin()){
+		if(null != user && user.isAdmin()){
 			return true;
 		}
 		
