@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter;
@@ -34,22 +33,12 @@ public class DynamicPermissionsAuthorizationFilter extends HttpMethodPermissionF
         	return true;
         }
         
-        Integer resId = checkRequestUrlValid((HttpServletRequest) request);
-        // no resource matched, return false
-        if(null == resId){
-        	return false;
-        }
-        
+        //TODO
         // add current request resource into those permissions that waiting for verification
-        String[] dynamicPerms = (String[]) ArrayUtils.add(perms, resId);
+        String[] dynamicPerms = (String[]) ArrayUtils.add(perms, null);
         
         return super.isAccessAllowed(request, response, dynamicPerms);
 	}
 	
 	
-	private Integer checkRequestUrlValid(HttpServletRequest request){
-		String requestURI = super.getPathWithinApplication(request);
-		User user = (User) SecurityUtil.currentUser();
-		return resService.queryUserResourceIdByUrl(user, requestURI);
-	}
 }

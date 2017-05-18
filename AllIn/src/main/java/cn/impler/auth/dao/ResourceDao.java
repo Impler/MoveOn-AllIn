@@ -1,6 +1,7 @@
 package cn.impler.auth.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -33,9 +34,9 @@ public interface ResourceDao extends AuthDao<Resource, Integer, ResourceSearchBe
 	
 	/**
 	 * query user referenced resources
-	 * @param user
+	 * @param userId
 	 * @return
 	 */
-	List<Resource> queryUserResources(@Param("user") User user);
+	Set<Resource> queryUserResources(@Param("userId") Integer userId);
 
 }

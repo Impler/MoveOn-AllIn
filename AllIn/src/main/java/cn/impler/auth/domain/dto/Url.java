@@ -59,4 +59,13 @@ public class Url {
 		return matcher.match(this.url, requestURI);
 	}
 
+	public static void main(String[] args) {
+		AntPathMatcher matcher = new AntPathMatcher();
+		System.out.println(matcher.match("abc", "abc"));
+		System.out.println(matcher.match("abc/*", "abc/aa"));
+		System.out.println(matcher.match("abc/{id}", "abc/a/"));
+		System.out.println(matcher.match("abc/{id}", "abc/a/b"));
+		System.out.println(matcher.match("abc/{id}", "abc/a?a=1"));
+		System.out.println(matcher.match("abc/{id}", "abc/a.do?a=1"));
+	}
 }

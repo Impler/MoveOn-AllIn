@@ -86,7 +86,7 @@
 					t_auth_resource_ref
 				WHERE
 					type = 1
-				AND left_value = #{user.id}
+				AND left_value = #{userId}
 			)
 		)
 	</select>

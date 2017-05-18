@@ -1,6 +1,7 @@
 package cn.impler.auth.dao.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
@@ -32,10 +33,12 @@ public class ResourceDaoImpl extends
 		return super.getDao().queryUserAntResources(user);
 	}
 
-	@Cacheable(value="userResources", key="#user.id", unless="#result.size() > 0")
+	@Cacheable(value="userResources", key="#userId", unless="#result.size() > 0")
 	@Override
-	public List<Resource> queryUserResources(User user) {
-		return super.getDao().queryUserResources(user);
+	public Set<Resource> queryUserResources(Integer userId) {
+		return super.getDao().queryUserResources(userId);
 	}
+
+	
 
 }
