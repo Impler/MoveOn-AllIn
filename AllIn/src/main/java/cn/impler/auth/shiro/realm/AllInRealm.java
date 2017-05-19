@@ -36,7 +36,7 @@ public class AllInRealm extends AuthorizingRealm{
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		User user = SecurityUtil.currentUser();
 		// query user referenced resources
-		Set<Resource> res = userResRefedService.queryUserRefedResources(user.getId());
+		Set<Resource> res = userResRefedService.queryUserAllRefedResources(user.getId());
 		// convert to permission
 		Set<Permission> objectPermissions = convertToPermission(res);
 		info.setObjectPermissions(objectPermissions);

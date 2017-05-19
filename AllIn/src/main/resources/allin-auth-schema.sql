@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2017-04-21 17:49:57
+Date: 2017-05-19 17:02:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,10 +24,12 @@ CREATE TABLE `t_auth_resource` (
   `name` varchar(30) DEFAULT NULL COMMENT '资源名称',
   `description` varchar(50) DEFAULT NULL COMMENT '资源描述',
   `type` int(10) DEFAULT NULL COMMENT '资源类型',
-  `level` int(11) DEFAULT NULL COMMENT '资源级别',
   `url` varchar(50) DEFAULT NULL COMMENT '资源路径',
-  `url_type` int(11) DEFAULT NULL COMMENT 'url类型：1 字面值Url，2 Ant Url',
+  `url_style` int(11) DEFAULT NULL COMMENT 'url类型：1 字面值Url，2 Ant Url',
+  `method` varchar(10) DEFAULT NULL COMMENT '请求方式',
   `seq` int(11) DEFAULT '0' COMMENT '顺序',
+  `level` int(11) DEFAULT NULL COMMENT '资源级别',
+  `status` int(11) DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -52,7 +54,7 @@ CREATE TABLE `t_auth_role` (
   `name` varchar(30) DEFAULT NULL COMMENT '角色名称',
   `description` varchar(64) DEFAULT NULL COMMENT '角色描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for t_auth_user
@@ -68,20 +70,3 @@ CREATE TABLE `t_auth_user` (
   `mobile_number` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for t_wechat_mrgfnr
--- ----------------------------
-DROP TABLE IF EXISTS `t_wechat_mrgfnr`;
-CREATE TABLE `t_wechat_mrgfnr` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'primary key, serial number',
-  `user_id` varchar(32) DEFAULT NULL COMMENT 'the user id',
-  `name` varchar(32) DEFAULT NULL COMMENT 'event name',
-  `type` tinyint(11) DEFAULT NULL COMMENT 'event type id',
-  `date` date DEFAULT NULL COMMENT 'date of the event',
-  `fee` float DEFAULT NULL COMMENT 'the costs',
-  `remark` varchar(200) DEFAULT NULL COMMENT 'event remark',
-  `create_time` datetime DEFAULT NULL COMMENT 'create time',
-  `last_update_time` datetime DEFAULT NULL COMMENT 'last update time',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;

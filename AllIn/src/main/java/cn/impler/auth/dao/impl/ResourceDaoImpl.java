@@ -9,6 +9,7 @@ import cn.impler.auth.dao.AbsAuthDao;
 import cn.impler.auth.dao.ResourceDao;
 import cn.impler.auth.domain.Resource;
 import cn.impler.auth.domain.dto.ResourceSearchBean;
+import cn.impler.auth.dto.ResourceLevelEnum;
 
 /**
  * resource dao implement
@@ -25,6 +26,11 @@ public class ResourceDaoImpl extends
 	@Override
 	public Set<Resource> queryUserResources(Integer userId) {
 		return super.getDao().queryUserResources(userId);
+	}
+
+	@Override
+	public Set<Resource> queryAllMenusByLevel(ResourceLevelEnum level) {
+		return super.getDao().queryAllMenusByLevel(level);
 	}
 
 	

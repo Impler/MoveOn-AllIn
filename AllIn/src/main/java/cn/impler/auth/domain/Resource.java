@@ -1,6 +1,7 @@
 package cn.impler.auth.domain;
 
 import cn.impler.auth.dto.RequestMethodTypeEnum;
+import cn.impler.auth.dto.ResourceLevelEnum;
 import cn.impler.auth.dto.ResourceTypeEnum;
 import cn.impler.auth.dto.ResourceUrlStyleEnum;
 
@@ -17,7 +18,7 @@ public class Resource extends BaseDomain {
 	// url type: literal/ant
 	private ResourceUrlStyleEnum style = ResourceUrlStyleEnum.LITERAL;
 	// resource level
-	private String level;
+	private ResourceLevelEnum level;
 	// resource seq
 	private int seq;
 	// resource request type: post/get/delete/put...
@@ -55,11 +56,11 @@ public class Resource extends BaseDomain {
 		this.type = type;
 	}
 
-	public String getLevel() {
+	public ResourceLevelEnum getLevel() {
 		return level;
 	}
 
-	public void setLevel(String level) {
+	public void setLevel(ResourceLevelEnum level) {
 		this.level = level;
 	}
 

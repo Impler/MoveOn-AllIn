@@ -3,14 +3,23 @@ package cn.impler.auth.service;
 import java.util.Set;
 
 import cn.impler.auth.domain.Resource;
+import cn.impler.auth.domain.User;
 
 public interface UserResourceRefedService {
 
 	/**
-	 * query user referenced resources
+	 * query user all referenced resources
+	 * including menu and link
 	 * @param userId
 	 * @return
 	 */
-	Set<Resource> queryUserRefedResources(Integer userId);
+	Set<Resource> queryUserAllRefedResources(Integer userId);
+
+	/**
+	 * query user top menus
+	 * @param user
+	 * @return
+	 */
+	Set<Resource> queryUserTopMenus(User user);
 
 }

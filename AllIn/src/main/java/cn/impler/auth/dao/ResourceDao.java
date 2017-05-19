@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import cn.impler.auth.domain.Resource;
 import cn.impler.auth.domain.dto.ResourceSearchBean;
+import cn.impler.auth.dto.ResourceLevelEnum;
 
 /**
  * resource dao
@@ -20,5 +21,12 @@ public interface ResourceDao extends AuthDao<Resource, Integer, ResourceSearchBe
 	 * @return
 	 */
 	Set<Resource> queryUserResources(@Param("userId") Integer userId);
+
+	/**
+	 * query all menus by level
+	 * @param level
+	 * @return
+	 */
+	Set<Resource> queryAllMenusByLevel(ResourceLevelEnum level);
 
 }

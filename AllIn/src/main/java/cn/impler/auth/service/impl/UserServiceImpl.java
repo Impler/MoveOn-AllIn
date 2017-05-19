@@ -1,6 +1,7 @@
 package cn.impler.auth.service.impl;
 
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import cn.impler.auth.domain.User;
 import cn.impler.auth.domain.dto.UserSearchBean;
 import cn.impler.auth.service.AbsAuthService;
 import cn.impler.auth.service.UserService;
+import cn.impler.auth.util.SecurityUtil;
 import cn.impler.common.util.RegexUtil;
 
 /**
@@ -29,6 +31,20 @@ public class UserServiceImpl extends
 	protected AuthDao<User, Integer, UserSearchBean> getAuthDao() {
 		return userDao;
 	}
+
+	/**
+	 * TODO
+	 * users' password should be set by themselves
+	 */
+	@Override
+	public int add(User e) {
+		SimpleHash simpleHash = SecurityUtil.encryptPassword(e.getPassword());
+		e.setSalt(simpleHash.getSalt().toString());
+		e.setPassword(simpleHash.toString());
+		return super.add(e);
+	}
+
+
 
 	@Override
 	public User querySecurityInfoByUsername(String username) {

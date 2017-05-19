@@ -40,6 +40,7 @@
 				<value>cn.impler.auth.dto.ResourceRefTypeEnum</value>
 				<value>cn.impler.auth.dto.UserIdentityEnum</value>
 				<value>cn.impler.auth.dto.ResourceTypeEnum</value>
+				<value>cn.impler.auth.dto.ResourceLevelEnum</value>
 			</array>
 		</property>
 	</bean>
