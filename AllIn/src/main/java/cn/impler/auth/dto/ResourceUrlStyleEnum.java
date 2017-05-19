@@ -7,13 +7,13 @@ import cn.impler.framework.mybatis.dao.dto.IGenericEnum;
  * @author impler
  * @date 2017-04-21
  */
-public enum ResourceUrlTypeEnum implements IGenericEnum{
+public enum ResourceUrlStyleEnum implements IGenericEnum{
 
 	LITERAL(1), ANT(2);
 	
 	private int id;
 	
-	private ResourceUrlTypeEnum(int id) {
+	private ResourceUrlStyleEnum(int id) {
 		this.id = id;
 	}
 

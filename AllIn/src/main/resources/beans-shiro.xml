@@ -11,7 +11,8 @@
 
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean"
 		p:securityManager-ref="securityManager" 
-		p:loginUrl="/auth/login.jsp">
+		p:loginUrl="/auth/login.jsp"
+		p:successUrl="/auth/index.do">
 		<property name="filters">
 			<util:map>
 				<entry key="perms" value-ref="dynamicPermissionsAuthorizationFilter" />
@@ -50,6 +51,9 @@
     		<bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
     			<property name="hashAlgorithmName" value="md5" />
     		</bean>
+    	</property>
+    	<property name="permissionResolver">
+    		<bean class="cn.impler.auth.shiro.Permission.RestfulPermissionResolver" />
     	</property>
     </bean>
     

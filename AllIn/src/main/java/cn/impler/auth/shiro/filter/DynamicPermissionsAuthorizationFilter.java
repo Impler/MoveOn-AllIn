@@ -33,12 +33,21 @@ public class DynamicPermissionsAuthorizationFilter extends HttpMethodPermissionF
         	return true;
         }
         
-        //TODO
         // add current request resource into those permissions that waiting for verification
-        String[] dynamicPerms = (String[]) ArrayUtils.add(perms, null);
+        String currentUri = super.getPathWithinApplication(request);
+        String[] dynamicPerms = (String[]) ArrayUtils.add(perms, currentUri);
         
         return super.isAccessAllowed(request, response, dynamicPerms);
 	}
-	
+
+	/**
+	 * TODO
+	 * ajax request or common request should be treated differently
+	 */
+	@Override
+	protected boolean onAccessDenied(ServletRequest request,
+			ServletResponse response) throws IOException {
+		return super.onAccessDenied(request, response);
+	}
 	
 }

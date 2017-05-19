@@ -8,67 +8,16 @@
 		<result column="description" property="description"/>
 		<result column="type" property="type"/>
 		<result column="level" property="level"/>
-		<result column="url" property="url.url"/>
-		<result column="url_type" property="url.type"/>
+		<result column="url" property="url"/>
+		<result column="url_style" property="style"/>
 		<result column="seq" property="seq"/>
+		<result column="method" property="method"/>
 	</resultMap>
 
-	<select id="queryUserResourceIdByLiteralUrl" resultType="Integer">
-		SELECT
-			id
-		FROM
-			t_auth_resource
-		WHERE
-			url = #{url.url}
-		AND url_type = #{url.type.id}
-		AND id IN (
-			SELECT DISTINCT
-				right_value AS resId
-			FROM
-				t_auth_resource_ref
-			WHERE
-				type = 2
-			AND left_value IN (
-				SELECT
-					right_value AS roleId
-				FROM
-					t_auth_resource_ref
-				WHERE
-					type = 1
-				AND left_value = #{user.id}
-			)
-		)
-	</select>
-	
-	<select id="queryUserAntResources" resultMap="resource">
-		SELECT
-			id, name, description, type, level, url, url_type, seq
-		FROM
-			t_auth_resource
-		WHERE
-			type = 2
-		AND id IN (
-			SELECT DISTINCT
-				right_value AS resId
-			FROM
-				t_auth_resource_ref
-			WHERE
-				type = 3
-			AND left_value IN (
-				SELECT
-					right_value AS roleId
-				FROM
-					t_auth_resource_ref
-				WHERE
-					type = 2
-				AND left_value = #{user.id}
-			)
-		)
-	</select>
 	
 	<select id="queryUserResources" resultMap="resource">
 		SELECT
-			id, name, description, type, level, url, url_type, seq
+			id, name, description, type, level, url, url_style, seq, method
 		FROM
 			t_auth_resource
 		WHERE

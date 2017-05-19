@@ -1,8 +1,8 @@
 package cn.impler.auth.domain;
 
-import cn.impler.auth.domain.dto.Url;
-import cn.impler.auth.dto.ResourceTypeEnum;
 import cn.impler.auth.dto.RequestMethodTypeEnum;
+import cn.impler.auth.dto.ResourceTypeEnum;
+import cn.impler.auth.dto.ResourceUrlStyleEnum;
 
 public class Resource extends BaseDomain {
 
@@ -10,15 +10,17 @@ public class Resource extends BaseDomain {
 	private String name;
 	// resource description
 	private String description;
-	// resource type
+	// resource type: menu/link
 	private ResourceTypeEnum type;
-	// resource url
-	private Url url;
+	// actual url
+	private String url;
+	// url type: literal/ant
+	private ResourceUrlStyleEnum style = ResourceUrlStyleEnum.LITERAL;
 	// resource level
 	private String level;
 	// resource seq
 	private int seq;
-	// resource request type
+	// resource request type: post/get/delete/put...
 	private RequestMethodTypeEnum method = RequestMethodTypeEnum.ALL;
 
 	public String getName() {
@@ -35,14 +37,6 @@ public class Resource extends BaseDomain {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public Url getUrl() {
-		return url;
-	}
-
-	public void setUrl(Url url) {
-		this.url = url;
 	}
 
 	public RequestMethodTypeEnum getMethod() {
@@ -77,4 +71,28 @@ public class Resource extends BaseDomain {
 		this.seq = seq;
 	}
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public ResourceUrlStyleEnum getStyle() {
+		return style;
+	}
+
+	public void setStyle(ResourceUrlStyleEnum style) {
+		this.style = style;
+	}
+
+	public String getPermissionString() {
+		StringBuffer sb = new StringBuffer(this.url);
+		if (null == this.method) {
+			this.method = RequestMethodTypeEnum.ALL;
+		}
+		sb.append(this.method.getAction());
+		return sb.toString();
+	}
 }

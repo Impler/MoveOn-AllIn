@@ -36,7 +36,7 @@
 		<property name="genericEnumClassNames">
 			<array>
 				<value>cn.impler.wechat.mrgfnr.dto.MrgFnrEventType</value>
-				<value>cn.impler.auth.dto.ResourceUrlTypeEnum</value>
+				<value>cn.impler.auth.dto.ResourceUrlStyleEnum</value>
 				<value>cn.impler.auth.dto.ResourceRefTypeEnum</value>
 				<value>cn.impler.auth.dto.UserIdentityEnum</value>
 				<value>cn.impler.auth.dto.ResourceTypeEnum</value>

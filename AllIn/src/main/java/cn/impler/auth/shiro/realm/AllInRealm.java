@@ -68,10 +68,9 @@ public class AllInRealm extends AuthorizingRealm{
 		if(null == res){
 			return null;
 		}
-		
 		Set<Permission> perms = new HashSet<Permission>();
 		for(Resource r : res){
-			perms.add(new RestfulPermission(r));
+			perms.add(new RestfulPermission(r.getPermissionString()));
 		}
 		return perms;
 	}
