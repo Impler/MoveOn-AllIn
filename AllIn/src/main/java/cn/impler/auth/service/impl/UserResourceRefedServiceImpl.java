@@ -9,7 +9,9 @@ import cn.impler.auth.dao.ResourceDao;
 import cn.impler.auth.dao.UserDao;
 import cn.impler.auth.domain.Resource;
 import cn.impler.auth.domain.User;
+import cn.impler.auth.domain.dto.ResourceRefedSearchBean;
 import cn.impler.auth.dto.ResourceLevelEnum;
+import cn.impler.auth.dto.ResourceTypeEnum;
 import cn.impler.auth.service.UserResourceRefedService;
 
 @Service("userResourceRefedService")
@@ -33,9 +35,27 @@ public class UserResourceRefedServiceImpl implements UserResourceRefedService {
 			// query all top menus
 			menus = resourceDao.queryAllMenusByLevel(ResourceLevelEnum.L1);
 		}else{
-			// TODO
+			ResourceRefedSearchBean search = new ResourceRefedSearchBean();
+			search.setLevel(ResourceLevelEnum.L1);
+			search.setType(ResourceTypeEnum.MENU);
+			search.setOwner(user);
 			// query user top menus
-//			menus = resourceDao.queryUserMenusByLevel(user, );
+			menus = resourceDao.queryUserMenusByLevel(search);
+		}
+		return menus;
+	}
+
+	@Override
+	public Set<Resource> queryUserSubMenus(Integer parentId, User user) {
+		Set<Resource> menus = null;
+		if(user.isAdmin()){
+			menus = resourceDao.querySubMenusByParentId(parentId);
+		}else{
+			ResourceRefedSearchBean search = new ResourceRefedSearchBean();
+			search.setOwner(user);
+			search.setParentId(parentId);
+			search.setType(ResourceTypeEnum.MENU);
+			menus = resourceDao.queryUserSubMenusByParentId(search);
 		}
 		return menus;
 	}

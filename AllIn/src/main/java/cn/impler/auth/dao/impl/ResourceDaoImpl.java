@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import cn.impler.auth.dao.AbsAuthDao;
 import cn.impler.auth.dao.ResourceDao;
 import cn.impler.auth.domain.Resource;
+import cn.impler.auth.domain.dto.ResourceRefedSearchBean;
 import cn.impler.auth.domain.dto.ResourceSearchBean;
 import cn.impler.auth.dto.ResourceLevelEnum;
 
@@ -33,6 +34,21 @@ public class ResourceDaoImpl extends
 		return super.getDao().queryAllMenusByLevel(level);
 	}
 
-	
+	@Override
+	public Set<Resource> queryUserMenusByLevel(ResourceRefedSearchBean search) {
+		return super.getDao().queryUserMenusByLevel(search);
+	}
+
+	@Override
+	public Set<Resource> querySubMenusByParentId(Integer parentId) {
+		
+		return super.getDao().querySubMenusByParentId(parentId);
+	}
+
+	@Override
+	public Set<Resource> queryUserSubMenusByParentId(
+			ResourceRefedSearchBean search) {
+		return super.getDao().queryUserSubMenusByParentId(search);
+	}
 
 }

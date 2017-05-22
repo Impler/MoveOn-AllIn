@@ -40,10 +40,82 @@
 		)
 	</select>
 	
+	<!-- query all menus by level-->
 	<select id="queryAllMenusByLevel" resultMap="resource">
 		select id, name, description, type, level, url, url_style, seq
 	    from t_auth_resource where type = 1 and level = #{id}
 	    order by seq
 	</select>
 	
+	<!-- query user menus by level -->
+	<select id="queryUserMenusByLevel" resultMap="resource">
+		SELECT
+			t.id, t.name, t.description, t.type, t.level, t.url, t.url_style, t.seq
+		FROM
+			(
+				-- 查询角色对应的操作
+				SELECT DISTINCT
+					rr.right_value rv
+				FROM
+					t_auth_resource_ref rr
+				WHERE
+					rr.type = 2
+				AND rr.left_value IN (
+				-- 查询用户角色
+					SELECT
+						r.right_value
+					FROM
+						t_auth_resource_ref r
+					WHERE
+						r.type = 1
+					AND r.left_value = #{owner.id}
+				)
+			) r
+		LEFT JOIN t_auth_resource t 
+		ON t.id = r.rv
+		AND t.type = #{type.id}
+		AND t.level = #{level.id}
+		ORDER BY
+			t.seq ASC
+	</select>
+	
+	<!-- query sub menus by parent menu id -->
+	<select id="querySubMenusByParentId" resultMap="resource">
+		select id, name, description, type, level, url, url_style, seq 
+		from t_auth_resource 
+		where parent_id = #{parentId}
+		order by seq
+	</select>
+	
+	<!-- query user sub menus by parent menu id -->
+	<select id="queryUserSubMenusByParentId" resultMap="resource">
+		SELECT
+			t.id, t.name, t.description, t.type, t.level, t.url, t.url_style, t.seq
+		FROM
+			(
+				-- 查询角色对应的操作
+				SELECT DISTINCT
+					rr.right_value rv
+				FROM
+					t_auth_resource_ref rr
+				WHERE
+					rr.type = 2
+				AND rr.left_value IN (
+				-- 查询用户角色
+					SELECT
+						r.right_value
+					FROM
+						t_auth_resource_ref r
+					WHERE
+						r.type = 1
+					AND r.left_value = #{owner.id}
+				)
+			) r
+		LEFT JOIN t_auth_resource t 
+		ON t.id = r.rv
+		AND t.type = #{type.id}
+		AND t.parent_id = #{parentId}
+		ORDER BY
+			t.seq ASC
+	</select>
 </mapper>

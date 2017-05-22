@@ -22,4 +22,12 @@ public interface UserResourceRefedService {
 	 */
 	Set<Resource> queryUserTopMenus(User user);
 
+	/**
+	 * query user sub menus
+	 * @param parentId parent menu id
+	 * @param user
+	 * @return
+	 */
+	Set<Resource> queryUserSubMenus(Integer parentId, User user);
+
 }

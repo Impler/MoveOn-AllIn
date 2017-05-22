@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `t_auth_resource`;
 CREATE TABLE `t_auth_resource` (
-  `id` int(11) NOT NULL COMMENT '资源编号',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '资源编号',
   `name` varchar(30) DEFAULT NULL COMMENT '资源名称',
   `description` varchar(50) DEFAULT NULL COMMENT '资源描述',
   `type` int(10) DEFAULT NULL COMMENT '资源类型',
@@ -29,9 +29,11 @@ CREATE TABLE `t_auth_resource` (
   `method` varchar(10) DEFAULT NULL COMMENT '请求方式',
   `seq` int(11) DEFAULT '0' COMMENT '顺序',
   `level` int(11) DEFAULT NULL COMMENT '资源级别',
+  `parent_id` int(11) DEFAULT NULL COMMENT 'parent resource id',
   `status` int(11) DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
 
 -- ----------------------------
 -- Table structure for t_auth_resource_ref

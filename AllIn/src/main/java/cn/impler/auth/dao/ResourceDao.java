@@ -5,6 +5,7 @@ import java.util.Set;
 import org.apache.ibatis.annotations.Param;
 
 import cn.impler.auth.domain.Resource;
+import cn.impler.auth.domain.dto.ResourceRefedSearchBean;
 import cn.impler.auth.domain.dto.ResourceSearchBean;
 import cn.impler.auth.dto.ResourceLevelEnum;
 
@@ -28,5 +29,26 @@ public interface ResourceDao extends AuthDao<Resource, Integer, ResourceSearchBe
 	 * @return
 	 */
 	Set<Resource> queryAllMenusByLevel(ResourceLevelEnum level);
+
+	/**
+	 * query user referenced menu by level
+	 * @param search
+	 * @return
+	 */
+	Set<Resource> queryUserMenusByLevel(ResourceRefedSearchBean search);
+
+	/**
+	 * query sub menus by parent menu id
+	 * @param parentId
+	 * @return
+	 */
+	Set<Resource> querySubMenusByParentId(Integer parentId);
+
+	/**
+	 * query user sub menus by parent menu id
+	 * @param search
+	 * @return
+	 */
+	Set<Resource> queryUserSubMenusByParentId(ResourceRefedSearchBean search);
 
 }
