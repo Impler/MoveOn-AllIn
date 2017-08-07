@@ -12,6 +12,7 @@
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean"
 		p:securityManager-ref="securityManager" 
 		p:loginUrl="/auth/login.jsp"
+		p:unauthorizedUrl="/auth/autherror.jsp"
 		p:successUrl="/auth/index.do">
 		<property name="filters">
 			<util:map>
@@ -20,6 +21,7 @@
 		</property>
 		<property name="filterChainDefinitions">
 			<value>
+				/auth/autherror.jsp = anon
 				/** = authc, perms
 			</value>
 		</property>
