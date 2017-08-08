@@ -7,17 +7,12 @@ import javax.servlet.ServletResponse;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.impler.auth.domain.User;
-import cn.impler.auth.service.ResourceService;
 import cn.impler.auth.util.SecurityUtil;
 
 public class DynamicPermissionsAuthorizationFilter extends HttpMethodPermissionFilter {
 
-	@Autowired
-	private ResourceService resService;
-	
 	@Override
 	public boolean isAccessAllowed(ServletRequest request,
 			ServletResponse response, Object mappedValue) throws IOException {

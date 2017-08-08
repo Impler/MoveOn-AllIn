@@ -43,7 +43,7 @@
 	<!-- query all menus by level-->
 	<select id="queryAllMenusByLevel" resultMap="resource">
 		select id, name, description, type, level, url, url_style, seq
-	    from t_auth_resource where type = 1 and level = #{id}
+	    from t_auth_resource where type = 1 and level = #{level}
 	    order by seq
 	</select>
 	
@@ -55,7 +55,7 @@
 			(
 				-- 查询角色对应的操作
 				SELECT DISTINCT
-					rr.right_value rv
+					rr.right_value resource_id
 				FROM
 					t_auth_resource_ref rr
 				WHERE
@@ -70,9 +70,8 @@
 						r.type = 1
 					AND r.left_value = #{owner.id}
 				)
-			) r
-		LEFT JOIN t_auth_resource t 
-		ON t.id = r.rv
+			) r, t_auth_resource t 
+		WHERE t.id = r.resource_id
 		AND t.type = #{type.id}
 		AND t.level = #{level.id}
 		ORDER BY

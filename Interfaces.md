@@ -2,6 +2,11 @@
 
 ## Authorization
 
+### Login
+- [get] /auth/login.jsp show login page
+- [post] /auth/login.jsp submit login request
+- [get] /auth/index.do show dashboard
+
 ### Role
 - [GET] /auth/role.do select by pagination
 - [POST] /auth/role/do add a role
