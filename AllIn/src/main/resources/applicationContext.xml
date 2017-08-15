@@ -8,11 +8,14 @@
         http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<context:property-placeholder location="classpath:properties/*.properties" />
+	
 	<!-- autoscan spring beans except @Controller s and Swagger Beans -->
 	<context:component-scan base-package="cn.impler">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 		<context:exclude-filter type="annotation" expression="com.mangofactory.swagger.plugin.EnableSwagger"/>
 	</context:component-scan>
+	
 	
 	<import resource="classpath*:beans-*.xml" />
 </beans>

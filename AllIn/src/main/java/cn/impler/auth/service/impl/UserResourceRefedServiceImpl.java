@@ -3,6 +3,7 @@ package cn.impler.auth.service.impl;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import cn.impler.auth.dao.ResourceDao;
@@ -19,12 +20,17 @@ public class UserResourceRefedServiceImpl implements UserResourceRefedService {
 	@Autowired
 	private ResourceDao resourceDao;
 
+	public UserResourceRefedServiceImpl() {
+		super();
+	}
+
 	@Override
 	public Set<Resource> queryUserAllRefedResources(Integer userId) {
 		return resourceDao.queryUserResources(userId);
 	}
 
 	@Override
+	@Cacheable(value="userTopMenus", key="#user.id")
 	public Set<Resource> queryUserTopMenus(User user) {
 		Set<Resource> menus = null;
 		if(user.isAdmin()){
@@ -42,6 +48,7 @@ public class UserResourceRefedServiceImpl implements UserResourceRefedService {
 	}
 
 	@Override
+	@Cacheable(value="userSubMenus", key="#user.id" + "_#p0")
 	public Set<Resource> queryUserSubMenus(Integer parentId, User user) {
 		Set<Resource> menus = null;
 		if(user.isAdmin()){

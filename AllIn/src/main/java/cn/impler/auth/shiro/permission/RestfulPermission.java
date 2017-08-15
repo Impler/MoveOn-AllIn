@@ -1,4 +1,4 @@
-package cn.impler.auth.shiro.Permission;
+package cn.impler.auth.shiro.permission;
 
 import java.io.Serializable;
 

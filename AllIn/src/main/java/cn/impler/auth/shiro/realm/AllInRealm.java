@@ -20,7 +20,7 @@ import cn.impler.auth.domain.Resource;
 import cn.impler.auth.domain.User;
 import cn.impler.auth.service.UserResourceRefedService;
 import cn.impler.auth.service.UserService;
-import cn.impler.auth.shiro.Permission.RestfulPermission;
+import cn.impler.auth.shiro.permission.RestfulPermission;
 import cn.impler.auth.util.SecurityUtil;
 
 public class AllInRealm extends AuthorizingRealm{

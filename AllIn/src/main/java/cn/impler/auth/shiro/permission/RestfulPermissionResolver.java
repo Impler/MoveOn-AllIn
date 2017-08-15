@@ -1,4 +1,4 @@
-package cn.impler.auth.shiro.Permission;
+package cn.impler.auth.shiro.permission;
 
 import org.apache.shiro.authz.Permission;
 import org.apache.shiro.authz.permission.PermissionResolver;

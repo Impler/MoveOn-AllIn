@@ -80,7 +80,7 @@
 
         diskPersistent=true since we want an enterprise session management feature - ability to use sessions after
         even after a JVM restart.  -->
-    <cache name="shiro-activeSessionCache"
+    <cache name="$[cache.shiro.sessionCache]"
            maxElementsInMemory="10000"
            overflowToDisk="true"
            eternal="true"
@@ -90,7 +90,25 @@
            diskExpiryThreadIntervalSeconds="600"/>
 
 
-	<cache name="userResources"
+	<cache name="$[cache.auth.userResources]"
+            maxElementsInMemory="10000"
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            overflowToDisk="false"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120" />
+
+	<cache name="$[cache.auth.userTopMenus]"
+            maxElementsInMemory="10000"
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            overflowToDisk="false"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120" />
+
+	<cache name="$[cache.auth.userSubMenus]"
             maxElementsInMemory="10000"
             eternal="false"
             timeToIdleSeconds="120"

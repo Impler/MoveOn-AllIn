@@ -8,7 +8,7 @@
 		</layout>
 	</appender>
 	
-	<appender name="mainlog" class="org.apache.log4j.FileAppender">
+	<appender name="mainlog" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="threshold" value="debug" />
 		<param name="file" value="/AllInLog/main.log"/>
 		<layout class="org.apache.log4j.PatternLayout">
@@ -16,7 +16,7 @@
 		</layout>
 	</appender>
 	
-	<appender name="otherlog" class="org.apache.log4j.FileAppender">
+	<appender name="otherlog" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="threshold" value="info" />
 		<param name="file" value="/AllInLog/other.log"/>
 		<layout class="org.apache.log4j.PatternLayout">
@@ -24,7 +24,7 @@
 		</layout>
 	</appender>
 	
-	<appender name="errorlog" class="org.apache.log4j.FileAppender">
+	<appender name="errorlog" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="threshold" value="error" />
 		<param name="file" value="/AllInLog/error.log"/>
 		<layout class="org.apache.log4j.PatternLayout">
@@ -32,8 +32,8 @@
 		</layout>
 	</appender>
 	
-	<logger name="cn.impler">
-		<level value="debug"></level>
+	<logger name="cn.impler" additivity="false">
+		<level value="debug" />
 		<appender-ref ref="mainlog"/>
 	</logger>
 	<root>

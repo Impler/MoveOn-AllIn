@@ -10,14 +10,12 @@
         http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:property-placeholder location="classpath*:jdbc.properties" />
-
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-		p:driverClassName="${jdbc.driverClassName}"
-		p:url="${jdbc.url}"
-		p:username="${jdbc.username}"
-		p:password="${jdbc.password}" />
+		p:driverClassName="$[jdbc.driverClassName]"
+		p:url="$[jdbc.url]"
+		p:username="$[jdbc.username]"
+		p:password="$[jdbc.password]" />
 
 	<bean id="sqlSessionFactory" 
 		class="cn.impler.framework.mybatis.dao.spring.EnhancedSqlSessionFactoryBean"

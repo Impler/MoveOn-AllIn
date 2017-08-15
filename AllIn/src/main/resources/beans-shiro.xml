@@ -55,7 +55,7 @@
     		</bean>
     	</property>
     	<property name="permissionResolver">
-    		<bean class="cn.impler.auth.shiro.Permission.RestfulPermissionResolver" />
+    		<bean class="cn.impler.auth.shiro.permission.RestfulPermissionResolver" />
     	</property>
     </bean>
     
