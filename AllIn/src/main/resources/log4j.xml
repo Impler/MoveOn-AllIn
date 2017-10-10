@@ -37,7 +37,7 @@
 		<appender-ref ref="mainlog"/>
 	</logger>
 	<root>
-		<level value="debug"/>
+		<level value="info"/>
 		<appender-ref ref="console" />
 		<appender-ref ref="otherlog" />
 		<appender-ref ref="errorlog" />

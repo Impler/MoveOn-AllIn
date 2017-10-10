@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.impler.auth.domain.Resource;
@@ -15,6 +16,7 @@ import cn.impler.auth.domain.dto.FooKey;
 import cn.impler.auth.service.UserResourceRefedService;
 import cn.impler.auth.util.SecurityUtil;
 import cn.impler.common.dto.Result;
+import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONObject;
 
 @Controller
@@ -29,7 +31,7 @@ public class IndexController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping
+	@RequestMapping(method=RequestMethod.GET)
 	public String toIndex(ModelMap model){
 		User user = SecurityUtil.currentUser();
 		Set<Resource> menus = urService.queryUserTopMenus(user);
@@ -42,7 +44,8 @@ public class IndexController {
 	 * @param parentId
 	 * @param validateRt
 	 */
-	@RequestMapping("/{id}/subMenus")
+	@ApiOperation(value = "显示菜单", httpMethod="GET")
+	@RequestMapping(value="/{id}/subMenus", method=RequestMethod.GET)
 	@ResponseBody
 	public JSONObject showSubMenus(FooKey parentId, BindingResult validateRt){
 		if(validateRt.hasErrors()){

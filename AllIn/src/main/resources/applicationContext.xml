@@ -13,7 +13,7 @@
 	<!-- autoscan spring beans except @Controller s and Swagger Beans -->
 	<context:component-scan base-package="cn.impler">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-		<context:exclude-filter type="annotation" expression="com.mangofactory.swagger.plugin.EnableSwagger"/>
+		<context:exclude-filter type="regex" expression="cn.impler.common.swagger.config.*"/>
 	</context:component-scan>
 	
 	
