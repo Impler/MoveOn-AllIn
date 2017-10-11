@@ -7,7 +7,9 @@ import cn.impler.auth.dto.ResourceUrlStyleEnum;
 
 public class Resource extends BaseDomain {
 
-	// resource name
+    private static final long serialVersionUID = -105700475346649117L;
+    
+    // resource name
 	private String name;
 	// resource description
 	private String description;

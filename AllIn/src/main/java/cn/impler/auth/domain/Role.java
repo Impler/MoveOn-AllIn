@@ -4,7 +4,9 @@ import javax.validation.constraints.NotNull;
 
 public class Role extends BaseDomain {
 
-	// role name
+    private static final long serialVersionUID = -1601772141550893776L;
+
+    // role name
 	@NotNull(message="{role.name}")
 	private String name;
 

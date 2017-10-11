@@ -4,7 +4,9 @@ import cn.impler.auth.dto.ResourceRefTypeEnum;
 
 public class ResourceRef<L extends BaseDomain, R extends BaseDomain> extends BaseDomain {
 
-	// key
+    private static final long serialVersionUID = 8711561411680275739L;
+    
+    // key
 	private L leftVal;
 	// references
 	private R rightVal;

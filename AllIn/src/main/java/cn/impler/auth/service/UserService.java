@@ -1,5 +1,6 @@
 package cn.impler.auth.service;
 
+import cn.impler.auth.domain.LoginDetail;
 import cn.impler.auth.domain.User;
 import cn.impler.auth.domain.dto.UserSearchBean;
 
@@ -24,5 +25,17 @@ public interface UserService
 	 * @return
 	 */
 	User queryCommonInfoByUsername(String username);
+	
+	/**
+	 * save login detail information
+	 * @param detail
+	 */
+	void saveLoginDetail(User user, LoginDetail detail);
+
+	/**
+	 * check user status
+	 * @param user
+	 */
+    void checkUserStatus(User user);
 	
 }

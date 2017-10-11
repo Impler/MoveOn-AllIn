@@ -10,28 +10,33 @@
 		<result column="SALT" property="salt"/>
 		<result column="EMAIL_ADDRESS" property="emailAddress"/>
 		<result column="MOBILE_NUMBER" property="mobileNum"/>
+		<result column="LOGIN_FAILED_TIMES" property="loginFailedTimes"/>
+		<result column="IS_LOCKED" property="isLocked"/>
+		<result column="LOCKED_TIME" property="lockedTime"/>
+		<result column="IS_ACTIVE" property="isActive"/>
+		<result column="CREATE_TIME" property="createTime"/>
 	</resultMap>
 	
 	<!-- query user security information s -->
 	<!-- user security field -->
 	<sql id="securityInfoSql">
-		USERNAME, PASSWORD, SALT 
+		ID, USERNAME, PASSWORD, SALT, LOGIN_FAILED_TIMES, IS_LOCKED, LOCKED_TIME, IS_ACTIVE, CREATE_TIME 
 	</sql>
-	<select id="querySecurityInfoByUsername" parameterType="string" resultType="user">
+	<select id="querySecurityInfoByUsername" parameterType="string" resultMap="user">
 		SELECT 
 		<include refid="securityInfoSql" />
 		FROM T_AUTH_USER
 		WHERE USERNAME = #{username}
 	</select>
 	
-	<select id="querySecurityInfoByMobileNum" parameterType="string" resultType="user">
+	<select id="querySecurityInfoByMobileNum" parameterType="string" resultMap="user">
 		SELECT 
 		<include refid="securityInfoSql" />
 		FROM T_AUTH_USER
 		WHERE MOBILE_NUMBER = #{mobileNum}
 	</select>
 	
-	<select id="querySecurityInfoByEmailAddress" parameterType="string" resultType="user">
+	<select id="querySecurityInfoByEmailAddress" parameterType="string" resultMap="user">
 		SELECT 
 		<include refid="securityInfoSql" />
 		FROM T_AUTH_USER
@@ -44,21 +49,21 @@
 	<sql id="commonInfoSql">
 		ID, USERNAME, EMAIL_ADDRESS, MOBILE_NUMBER
 	</sql>
-	<select id="queryCommonInfoByUsername" parameterType="string" resultType="user">
+	<select id="queryCommonInfoByUsername" parameterType="string" resultMap="user">
 		SELECT 
 		<include refid="commonInfoSql" />
 		FROM T_AUTH_USER
 		WHERE USERNAME = #{username}
 	</select>
 	
-	<select id="queryCommonInfoByMobileNum" parameterType="string" resultType="user">
+	<select id="queryCommonInfoByMobileNum" parameterType="string" resultMap="user">
 		SELECT 
 		<include refid="commonInfoSql" />
 		FROM T_AUTH_USER
 		WHERE MOBILE_NUMBER = #{mobileNum}
 	</select>
 	
-	<select id="queryCommonInfoByEmailAddress" parameterType="string" resultType="user">
+	<select id="queryCommonInfoByEmailAddress" parameterType="string" resultMap="user">
 		SELECT 
 		<include refid="commonInfoSql" />
 		FROM T_AUTH_USER
@@ -67,8 +72,12 @@
 	<!-- query user common information e -->
 	
 	<insert id="insert" parameterType="User">
-		INSERT INTO T_AUTH_USER (USERNAME, PASSWORD, SALT, NICKNAME, EMAIL_ADDRESS, MOBILE_NUMBER)
-		VALUES(#{username}, #{password}, #{salt}, #{nickname}, #{emailAddress}, #{mobileNum})
+		INSERT INTO T_AUTH_USER (USERNAME, PASSWORD, SALT, NICKNAME, EMAIL_ADDRESS, MOBILE_NUMBER, CREATE_TIME)
+		VALUES(#{username}, #{password}, #{salt}, #{nickname}, #{emailAddress}, #{mobileNum}, NOW())
 	</insert>
 	
+	<update id="updateLockedStatus" parameterType="User">
+	   UPDATE T_AUTH_USER SET IS_LOCKED = #{isLocked}, LOGIN_FAILED_TIMES = #{loginFailedTimes}, LOCKED_TIME = #{lockedTime}
+	   WHERE ID=#{id}
+	</update>
 </mapper>

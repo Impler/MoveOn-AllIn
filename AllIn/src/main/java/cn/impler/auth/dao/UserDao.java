@@ -51,5 +51,11 @@ public interface UserDao extends AuthDao<User, Integer, UserSearchBean> {
 	 * @return
 	 */
 	User queryCommonInfoByEmailAddress(String emailAddress);
+	
+	/**
+	 * update user locked status
+	 * @param user
+	 */
+	public int updateLockedStatus(User user);
 
 }

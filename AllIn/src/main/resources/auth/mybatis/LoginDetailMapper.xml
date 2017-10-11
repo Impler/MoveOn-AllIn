@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.impler.auth.dao.LoginDetailDao">
+
+	<resultMap id="loginDetail" type="LoginDetail">
+		<id column="ID" property="id"/>
+		<result column="USERNAME" property="username"/>
+		<result column="IP" property="ip"/>
+		<result column="LOGIN_DEVICE" property="device"/>
+		<result column="LOGIN_STATUS" property="loginStatus"/>
+		<result column="LOGIN_EXCEPTION" property="loginException"/>
+		<result column="CREATE_TIME" property="createTime"/>
+	</resultMap>
+	
+	<insert id="insert" parameterType="LoginDetail">
+		INSERT INTO T_AUTH_LOGIN_DETAIL (USERNAME, IP, LOGIN_DEVICE, LOGIN_STATUS, LOGIN_EXCEPTION, CREATE_TIME)
+		VALUES(#{username}, #{ip}, #{device}, #{loginStatus}, #{loginException}, now())
+	</insert>
+	
+</mapper>

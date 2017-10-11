@@ -53,4 +53,9 @@ public class UserDaoImpl extends
 		return super.getDao().queryCommonInfoByEmailAddress(emailAddress);
 	}
 
+    @Override
+    public int updateLockedStatus(User user) {
+        return super.getDao().updateLockedStatus(user);
+    }
+
 }
